@@ -1,6 +1,25 @@
-require("@nomicfoundation/hardhat-toolbox");
+/* hardhat.config.js */
+require("@nomiclabs/hardhat-waffle")
 
-/** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
-  solidity: "0.8.17",
-};
+  defaultNetwork: "hardhat",
+  networks: {
+    hardhat: {
+      chainId: 1337
+    },
+    //  unused configuration commented out for now
+    //  mumbai: {
+    //    url: "https://rpc-mumbai.maticvigil.com",
+    //    accounts: [process.env.privateKey]
+    //  }
+  },
+  solidity: {
+    version: "0.8.4",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200
+      }
+    }
+  }
+}

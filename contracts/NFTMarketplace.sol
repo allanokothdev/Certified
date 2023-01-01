@@ -1,0 +1,205 @@
+//SPDX-License-Identifier: Unlicense
+pragma solidity ^0.8.9;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+
+//Security Package to avoid continuous request of buying and selling
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+
+contract NFTMarketplace is ReentrancyGuard {
+    using Counters for Counters.Counter;
+
+    // auto-increment field for
+    //  Item Id and No. of Items Transferred
+    Counters.Counter private _certIds;
+    Counters.Counter private _programIds;
+
+    uint256 listingPrice = 0.025 ether;
+    address payable owner;
+
+    // Data Structure of a certificate
+    struct Certificate {
+        uint256 certId;
+        address nftContract;
+        uint256 tokenId;
+        address student;
+        string programId;
+        address publisher;
+    }
+
+    // Data Structure of a program
+    struct Program {
+        uint256 programId;
+        address nftContract;
+        uint256 tokenId;
+        address publisher;
+    }
+
+    // Mapping the Certificates with respect to their IDs.
+    mapping(uint256 => Certificate) private certificateList;
+
+    // Mapping the Programs with respect to their IDs.
+    mapping(uint256 => Program) private programList;
+
+    event CertificateItemCreated(
+        uint256 indexed certId,
+        address indexed nftContract,
+        uint256 indexed tokenId,
+        address student,
+        string programId,
+        address publisher
+    );
+
+    event ProgramItemCreated(
+        uint256 indexed certId,
+        address indexed nftContract,
+        uint256 indexed tokenId,
+        address publisher
+    );
+
+    constructor() {
+      owner = payable(msg.sender);
+    }
+
+    /* Updates the listing price of the contract */
+    function updateListingPrice(uint _listingPrice) public payable {
+      require(owner == msg.sender, "Only marketplace owner can update listing price.");
+      listingPrice = _listingPrice;
+    }
+
+    /* Returns the listing price of the contract */
+    function getListingPrice() public view returns (uint256) {
+      return listingPrice;
+    }
+
+
+     /// @notice Function for Creating a Progra, on the Platform
+    /// @param nftContract: NFT contract address
+    /// @param tokenId: Token Id of the contract.
+    function createProgram(address nftContract, uint256 tokenId)
+        public
+        nonReentrant
+    {
+        
+        _programIds.increment();
+        uint256 programId = _programIds.current();
+
+        programList[programId] = Program(
+            programId,
+            nftContract,
+            tokenId,
+            msg.sender
+        );
+
+        // Triggering the ProgramItemCreated event
+        emit ProgramItemCreated(programId, nftContract, tokenId, msg.sender);
+    }
+
+
+    /// @notice Returns programs
+    function fetchPrograms() public view returns (Program[] memory) {
+        uint256 totalItemCount = _programIds.current();
+        uint256 itemCount = 0;
+        uint256 currentIndex = 0;
+
+        for (uint256 i = 0; i < totalItemCount; i++) {
+            itemCount += 1;
+        }
+
+        Program[] memory items = new Program[](itemCount);
+        for (uint256 i = 0; i < totalItemCount; i++) {
+            uint256 currentId = programList[i + 1].programId;
+            Program storage currentItem = programList[currentId];
+            items[currentIndex] = currentItem;
+            currentIndex += 1;
+        }
+        return items;
+    }
+
+    /// @notice Function for Creating a certificate on the Platform
+    /// @param nftContract: NFT contract address
+    /// @param tokenId: Token Id of the contract.
+    function createCertificate(address nftContract, address student_address, string memory programId, uint256 tokenId, uint256 price)
+        public
+        payable
+        nonReentrant
+    {
+        require(price > 0, "Price must be at least 1 wei");
+        require(msg.value == listingPrice, "Price must be equal to listing price");
+
+        _certIds.increment();
+        uint256 certId = _certIds.current();
+
+        certificateList[certId] = Certificate(
+            certId,
+            nftContract,
+            tokenId,
+            student_address,
+            programId,
+            msg.sender
+        );
+
+        // Transferring the NFT contract from the Publisher to the Student Address
+        IERC721(nftContract).transferFrom(msg.sender, student_address, tokenId);
+
+        // Triggering the CertificateItemCreated event
+        emit CertificateItemCreated(
+            certId,
+            nftContract,
+            tokenId,
+            student_address,
+            programId,
+            msg.sender
+        );
+    }
+
+
+    /// @notice Returns certificates of the user
+    function fetchStudentCertificates(address _student_address) public view returns (Certificate[] memory) {
+        uint256 totalItemCount = _certIds.current();
+        uint256 itemCount = 0;
+        uint256 currentIndex = 0;
+
+        for (uint256 i = 0; i < totalItemCount; i++) {
+            if (certificateList[i + 1].student == _student_address) {
+                itemCount += 1;
+            }
+        }
+
+        Certificate[] memory items = new Certificate[](itemCount);
+        for (uint256 i = 0; i < totalItemCount; i++) {
+            if (certificateList[i + 1].student == _student_address) {
+                uint256 currentId = certificateList[i + 1].certId;
+                Certificate storage currentItem = certificateList[currentId];
+                items[currentIndex] = currentItem;
+                currentIndex += 1;
+            }
+        }
+        return items;
+    }
+
+    /// @notice Returns certificates of the program
+    function fetchProgramCertificates(string memory _programId) public view returns (Certificate[] memory) {
+        uint256 totalItemCount = _certIds.current();
+        uint256 itemCount = 0;
+        uint256 currentIndex = 0;
+
+        for (uint256 i = 0; i < totalItemCount; i++) {
+            if ( keccak256(abi.encodePacked(certificateList[i + 1].programId)) == keccak256(abi.encodePacked(_programId)) ) {
+                itemCount += 1;
+            }
+        }
+
+        Certificate[] memory items = new Certificate[](itemCount);
+        for (uint256 i = 0; i < totalItemCount; i++) {
+            if ( keccak256(abi.encodePacked(certificateList[i + 1].programId)) == keccak256(abi.encodePacked(_programId)) ) {
+                uint256 currentId = certificateList[i + 1].certId;
+                Certificate storage currentItem = certificateList[currentId];
+                items[currentIndex] = currentItem;
+                currentIndex += 1;
+            }
+        }
+        return items;
+    }
+}
