@@ -12,7 +12,7 @@ export default function Home() {
         <title>Certified</title>
         <meta name="description" content="Authentic Certificates" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="../public/favicon.ico" />
+        <link rel="icon" href="../public/favicon.png" />
       </Head>
       <main className={styles.main}>
         <Hero/>

@@ -7,7 +7,7 @@ import { nftAddress, nftMarketplaceAddress } from "../config";
 import NFT from "../abi/NFT.json";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 
-export default function ProductList() {
+export default function Professionals() {
 
     const [professionals, setProfessionals] = useState([]);
     const [loadingState, setLoadingState] = useState('not-loaded');
