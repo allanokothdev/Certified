@@ -7,7 +7,7 @@ export default function Contact() {
         <section class="relative pt-12 pb-16 bg-white overflow-hidden">
                 <div class="relative z-10 container px-4 mx-auto">
                     <h2 class="mb-4 text-6xl md:text-4xl xl:text-5xl text-center font-bold font-heading tracking-px-n leading-none">Get connected</h2>
-                    <p class="mb-20 text-lg text-gray-600 text-center font-medium leading-normal md:max-w-lg mx-auto">Lorem ipsum dolor sit amet, to the con adipiscing. Volutpat tempor to the condimentum vitae vel purus.</p>
+                <p class="mb-20 text-lg text-gray-600 text-center font-medium leading-normal md:max-w-lg mx-auto">Connect with Certified today and see how we can protect your Brands Reputation from Fraudulent Certificates</p>
                     <div class="flex flex-wrap -m-3">
                         <div class="w-full md:w-1/3 p-3">
                             <div class="p-11 h-full text-center bg-white bg-opacity-90 border border-blueGray-100 rounded-xl shadow-11xl">
