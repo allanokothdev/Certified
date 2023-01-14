@@ -60,6 +60,7 @@ export default function CreateProgram() {
                                     <select class="block w-full bg-white text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full " required="required" name="program_category" id="program_category">
                                         <option value="">Bootcamp</option>
                                         <option value="">Competition</option>
+                                        <option value="">Conference</option>
                                         <option value="">Course</option>
                                         <option value="">Exchange Program</option>
                                         <option value="">Fellowship</option>
@@ -95,13 +96,13 @@ export default function CreateProgram() {
 
                                 <div className="flex-auto w-full mb-1 text-xs space-y-2">
                                     <label className="font-semibold text-gray-600 py-2">
-                                        Program Summary
+                                        Program Summary <abbr title="required">*</abbr>
                                     </label>
                                     <textarea
                                         required="required"
                                         name="program_summary"
                                         id="program_summary"
-                                        className="w-full min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4"
+                                        className="min-h-[100px] max-h-[300px] h-28 appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg  py-4 px-4"
                                         placeholder="Enter Program Summary"
                                         spellCheck="false"
                                         defaultValue={""}

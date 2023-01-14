@@ -1,8 +1,6 @@
 import Head from 'next/head'
-import Hero from './create-program'
-import { Inter } from '@next/font/google'
+import Hero from './home'
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
