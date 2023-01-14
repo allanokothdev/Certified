@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateProgram from './create-program';
+import CreateProgram from './create-professional';
 
 export default function Home() {
 
@@ -21,7 +21,7 @@ export default function Home() {
                                 </p>
 
                                 <div className="mb-2 md:inline-block">
-                                    <button onClick={CreateProgram} className="mb-8 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200"
+                                    <button onClick={< CreateProgram/>} className="mb-8 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200"
                                         type="button"
                                     >
                                         Get Started today!
