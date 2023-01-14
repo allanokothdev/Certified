@@ -22,15 +22,11 @@ export default function Programs() {
      * @returns {Promise<void>}
      */
     async function loadPrograms() {
-        const web3Modal = new Web3Modal();
-        const connection = await web3Modal.connect();
-        const provider = new ethers.providers.Web3Provider(connection);
-        const signer = provider.getSigner();
 
-        const marketContract = new ethers.Contract(NFTMarketplace, nftMarketplaceAddress, signer);
-        const tokenContract = new ethers.Contract(nftAddress, NFT, provider);
-        //fetching programs from the market contracts
-        const data = await marketContract.fetchPrograms();
+        /* create a generic provider and query for listed programs items */
+        const provider = new ethers.providers.JsonRpcProvider()
+        const contract = new ethers.Contract(nftMarketplaceAddress, NFTMarketplace.abi, provider)
+        const data = await contract.fetchPrograms()
 
         const items = await Promise.all(data.map(async i => {
             //getting the ipfs url of each program pic item
@@ -43,12 +39,11 @@ export default function Programs() {
                 id: i.programId,
                 address: i.publisher,
                 pic: meta.data.image,
-                title: i.title,
-                summary: i.summary,
-                description: i.description,
-                year: i.year,
-                applicationLink: i.applicationLink,
-                deadline: i.deadline
+                title: meta.data.title,
+                summary: meta.data.summary,
+                description: meta.data.description,
+                year: meta.data.year,
+                applicationLink: meta.data.applicationLink
             };
             return item;
         }));
@@ -61,7 +56,7 @@ export default function Programs() {
     return (
         <div className="bg-white">
 
-            <button className="mx-10 mt-4 py-2 px-10 text-white font-semibold border border-black rounded-xl md:rounded-full focus:ring focus:ring-black bg-black hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Create Program</button>
+            <button className="justify-self-end mx-10 mt-4 py-2 px-10 text-white font-semibold border border-black rounded-xl md:rounded-full focus:ring focus:ring-black bg-black hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Create Program</button>
 
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <div className="mt-1 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
