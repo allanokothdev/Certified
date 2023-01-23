@@ -1,9 +1,9 @@
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 
-export default function CreateProfessional() {
-    const [open, setOpen] = useState(true)
+export default function CreateProfessional( status ) {
 
+    const [open, setOpen] = useState(status)
     const cancelButtonRef = useRef(null)
 
     return (
@@ -118,7 +118,7 @@ export default function CreateProfessional() {
                                                         </label>
                                                         <div className="flex flex-wrap items-stretch w-full mb-4 relative">
                                                             <div className="flex">
-                                                                <span className="flex items-center leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark text-sm w-12 h-10 bg-blue-300 justify-center items-center  text-xl rounded-lg text-white">
+                                                                <span className="flex leading-normal bg-grey-lighter border-1 rounded-r-none border border-r-0 border-blue-300 px-3 whitespace-no-wrap text-grey-dark text-sm w-12 h-10 bg-blue-300 justify-center items-center  text-xl rounded-lg text-white">
                                                                     <svg
                                                                         xmlns="http://www.w3.org/2000/svg"
                                                                         className="h-6 w-6"
