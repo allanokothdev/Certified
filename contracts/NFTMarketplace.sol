@@ -40,7 +40,7 @@ contract NFTMarketplace is ReentrancyGuard {
         address nftContract;
         uint256 tokenId;
         address student;
-        string programId;
+        uint256 programId;
         address publisher;
     }
 
@@ -69,7 +69,7 @@ contract NFTMarketplace is ReentrancyGuard {
         address indexed nftContract,
         uint256 indexed tokenId,
         address student,
-        string programId,
+        uint256 programId,
         address publisher
     );
 
@@ -214,7 +214,7 @@ contract NFTMarketplace is ReentrancyGuard {
     /// @notice Function for Creating a certificate on the Platform
     /// @param nftContract: NFT contract address
     /// @param tokenId: Token Id of the contract.
-    function createCertificate(address nftContract, address student_address, string memory programId, uint256 tokenId, uint256 price)
+    function createCertificate(address nftContract, address student_address, uint256 _programId, uint256 tokenId, uint256 price)
         public
         payable
         nonReentrant
@@ -230,7 +230,7 @@ contract NFTMarketplace is ReentrancyGuard {
             nftContract,
             tokenId,
             student_address,
-            programId,
+            _programId,
             msg.sender
         );
 
@@ -243,7 +243,7 @@ contract NFTMarketplace is ReentrancyGuard {
             nftContract,
             tokenId,
             student_address,
-            programId,
+            _programId,
             msg.sender
         );
     }
@@ -274,20 +274,20 @@ contract NFTMarketplace is ReentrancyGuard {
     }
 
     /// @notice Returns certificates of the program
-    function fetchProgramCertificates(string memory _programId) public view returns (Certificate[] memory) {
+    function fetchProgramCertificates(uint256 _programId) public view returns (Certificate[] memory) {
         uint256 totalItemCount = _certIds.current();
         uint256 itemCount = 0;
         uint256 currentIndex = 0;
 
         for (uint256 i = 0; i < totalItemCount; i++) {
-            if ( keccak256(abi.encodePacked(certificateList[i + 1].programId)) == keccak256(abi.encodePacked(_programId)) ) {
+            if (certificateList[i + 1].programId == _programId) {
                 itemCount += 1;
             }
         }
 
         Certificate[] memory items = new Certificate[](itemCount);
         for (uint256 i = 0; i < totalItemCount; i++) {
-            if ( keccak256(abi.encodePacked(certificateList[i + 1].programId)) == keccak256(abi.encodePacked(_programId)) ) {
+            if (certificateList[i + 1].programId == _programId) {
                 uint256 currentId = certificateList[i + 1].certId;
                 Certificate storage currentItem = certificateList[currentId];
                 items[currentIndex] = currentItem;

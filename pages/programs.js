@@ -1,10 +1,8 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Web3Modal from "web3modal";
-import { nftAddress, nftMarketplaceAddress } from "../config";
+import { NFTMarketplaceAddress } from "../config";
 
-import NFT from "../abi/NFT.json";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 
 export default function Programs() {
@@ -24,8 +22,8 @@ export default function Programs() {
     async function loadPrograms() {
 
         /* create a generic provider and query for listed programs items */
-        const provider = new ethers.providers.JsonRpcProvider()
-        const contract = new ethers.Contract(nftMarketplaceAddress, NFTMarketplace.abi, provider)
+        const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com")
+        const contract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, provider)
         const data = await contract.fetchPrograms()
 
         const items = await Promise.all(data.map(async i => {

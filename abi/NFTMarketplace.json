@@ -33,9 +33,9 @@
 			},
 			{
 				"indexed": false,
-				"internalType": "string",
+				"internalType": "uint256",
 				"name": "programId",
-				"type": "string"
+				"type": "uint256"
 			},
 			{
 				"indexed": false,
@@ -83,13 +83,13 @@
 			{
 				"indexed": false,
 				"internalType": "string",
-				"name": "summary",
+				"name": "title",
 				"type": "string"
 			},
 			{
 				"indexed": false,
 				"internalType": "string",
-				"name": "category",
+				"name": "summary",
 				"type": "string"
 			},
 			{
@@ -162,25 +162,13 @@
 			{
 				"indexed": false,
 				"internalType": "string",
-				"name": "description",
+				"name": "category",
 				"type": "string"
 			},
 			{
 				"indexed": false,
 				"internalType": "string",
 				"name": "year",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "applicationLink",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "deadline",
 				"type": "string"
 			}
 		],
@@ -200,9 +188,9 @@
 				"type": "address"
 			},
 			{
-				"internalType": "string",
-				"name": "programId",
-				"type": "string"
+				"internalType": "uint256",
+				"name": "_programId",
+				"type": "uint256"
 			},
 			{
 				"internalType": "uint256",
@@ -239,12 +227,12 @@
 			},
 			{
 				"internalType": "string",
-				"name": "_summary",
+				"name": "_title",
 				"type": "string"
 			},
 			{
 				"internalType": "string",
-				"name": "_category",
+				"name": "_summary",
 				"type": "string"
 			},
 			{
@@ -297,28 +285,69 @@
 			},
 			{
 				"internalType": "string",
-				"name": "_description",
+				"name": "_category",
 				"type": "string"
 			},
 			{
 				"internalType": "string",
 				"name": "_year",
 				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_applicationLink",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_deadline",
-				"type": "string"
 			}
 		],
 		"name": "createProgram",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_student_address",
+				"type": "address"
+			}
+		],
+		"name": "fetchProfessionalCertificates",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "certId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "nftContract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "student",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "programId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "publisher",
+						"type": "address"
+					}
+				],
+				"internalType": "struct NFTMarketplace.Certificate[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -354,12 +383,12 @@
 					},
 					{
 						"internalType": "string",
-						"name": "summary",
+						"name": "title",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "category",
+						"name": "summary",
 						"type": "string"
 					},
 					{
@@ -394,9 +423,9 @@
 	{
 		"inputs": [
 			{
-				"internalType": "string",
+				"internalType": "uint256",
 				"name": "_programId",
-				"type": "string"
+				"type": "uint256"
 			}
 		],
 		"name": "fetchProgramCertificates",
@@ -424,9 +453,9 @@
 						"type": "address"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "programId",
-						"type": "string"
+						"type": "uint256"
 					},
 					{
 						"internalType": "address",
@@ -480,77 +509,16 @@
 					},
 					{
 						"internalType": "string",
-						"name": "description",
+						"name": "category",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
 						"name": "year",
 						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "applicationLink",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "deadline",
-						"type": "string"
 					}
 				],
 				"internalType": "struct NFTMarketplace.Program[]",
-				"name": "",
-				"type": "tuple[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_student_address",
-				"type": "address"
-			}
-		],
-		"name": "fetchStudentCertificates",
-		"outputs": [
-			{
-				"components": [
-					{
-						"internalType": "uint256",
-						"name": "certId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "nftContract",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "student",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "programId",
-						"type": "string"
-					},
-					{
-						"internalType": "address",
-						"name": "publisher",
-						"type": "address"
-					}
-				],
-				"internalType": "struct NFTMarketplace.Certificate[]",
 				"name": "",
 				"type": "tuple[]"
 			}

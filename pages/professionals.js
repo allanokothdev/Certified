@@ -1,14 +1,14 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Web3Modal from "web3modal";
-import { nftAddress, nftMarketplaceAddress } from "../config";
+import CreateProfessional from "./create-professional";
+import { NFTMarketplaceAddress } from "../config";
 
-import NFT from "../abi/NFT.json";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 
 export default function Professionals() {
 
+    const [showModal, setShowModal] = useState(false);
     const [professionals, setProfessionals] = useState([]);
     const [loadingState, setLoadingState] = useState('not-loaded');
 
@@ -17,14 +17,16 @@ export default function Professionals() {
         loadProfessionals();
     }, []);
 
+    const handleOnClose = () => setShowModal(false);
+
     /**
      * Load the current user Nft
      * @returns {Promise<void>}
      */
     async function loadProfessionals() {
         /* create a generic provider and query for listed programs items */
-        const provider = new ethers.providers.JsonRpcProvider()
-        const contract = new ethers.Contract(nftMarketplaceAddress, NFTMarketplace.abi, provider)
+        const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com")
+        const contract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, provider)
         const data = await contract.fetchProfessionals()
 
         const items = await Promise.all(data.map(async i => {
@@ -57,7 +59,7 @@ export default function Professionals() {
 
     return (
         <div className="bg-white">
-            <button className="justify-self-end mx-10 mt-4 py-2 px-10 text-white font-semibold border border-black rounded-xl md:rounded-full focus:ring focus:ring-black bg-black hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Create Professional Account</button>
+            <button onClick={() => setShowModal(true)} className="justify-self-end mx-10 mt-4 py-2 px-10 text-white font-semibold border border-black rounded-xl md:rounded-full focus:ring focus:ring-black bg-black hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Create Professional Account</button>
 
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -95,6 +97,7 @@ export default function Professionals() {
 
                 </div>
             </div>
+            <CreateProfessional onClose={handleOnClose} visible={showModal}/>
         </div>
     )
 }
