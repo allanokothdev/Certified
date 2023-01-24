@@ -55,7 +55,7 @@ export default function Professionals() {
         setProfessionals(items);
         setLoadingState('loaded');
     }
-    if (loadingState === 'loaded' && !professionals.length) return (<h1 className="py-10 px-20 text-3xl"> No Professionals have registered</h1>)
+   // if (loadingState === 'loaded' && !professionals.length) return (<h1 className="py-10 px-20 text-3xl"> No Professionals have registered</h1>)
 
     return (
         <div className="bg-white">
