@@ -27,11 +27,6 @@ contract NFTMarketplace is ReentrancyGuard {
         uint256 tokenId;
         string name;
         string title;
-        string summary;
-        string location;
-        string twitterLink;
-        string githubLink;
-        string linkedinLink;
     }
 
     // Data Structure of a certificate
@@ -51,7 +46,6 @@ contract NFTMarketplace is ReentrancyGuard {
         uint256 tokenId;
         address publisher;
         string title;
-        string summary;
         string category;
         string year;
     }
@@ -79,7 +73,6 @@ contract NFTMarketplace is ReentrancyGuard {
         uint256 indexed tokenId,
         address publisher,
         string title,
-        string summary,
         string category,
         string year
     );
@@ -90,12 +83,7 @@ contract NFTMarketplace is ReentrancyGuard {
         address indexed nftContract,
         uint256 indexed tokenId,
         string name,
-        string title,
-        string summary,
-        string location,
-        string twitterLink,
-        string githubLink,
-        string linkedinLink
+        string title
     );
 
     constructor() {
@@ -116,7 +104,7 @@ contract NFTMarketplace is ReentrancyGuard {
      /// @notice Function for Creating a Professional, on the Platform
     /// @param nftContract: NFT contract address
     /// @param tokenId: Token Id of the contract.
-    function createProfessional(address nftContract, uint256 tokenId, string memory _name, string memory _title, string memory _summary, string memory _location, string memory _twitterLink, string memory _githubLink, string memory _linkedinLink)
+    function createProfessional(address nftContract, uint256 tokenId, string memory _name, string memory _title)
         public
         nonReentrant
     {
@@ -130,16 +118,11 @@ contract NFTMarketplace is ReentrancyGuard {
             nftContract,
             tokenId,
             _name,
-            _title,
-            _summary,
-            _location,
-            _twitterLink,
-            _githubLink,
-            _linkedinLink
+            _title
         );
 
         // Triggering the ProfessionalItemCreated event
-        emit ProfessionalItemCreated(professionalId, msg.sender, nftContract, tokenId, _name, _title, _summary, _location, _twitterLink, _githubLink, _linkedinLink);
+        emit ProfessionalItemCreated(professionalId, msg.sender, nftContract, tokenId, _name, _title);
     }
 
 
@@ -167,7 +150,7 @@ contract NFTMarketplace is ReentrancyGuard {
      /// @notice Function for Creating a Progra, on the Platform
     /// @param nftContract: NFT contract address
     /// @param tokenId: Token Id of the contract.
-    function createProgram(address nftContract, uint256 tokenId, string memory _title, string memory _summary, string memory _category, string memory _year )
+    function createProgram(address nftContract, uint256 tokenId, string memory _title, string memory _category, string memory _year )
         public
         nonReentrant
     {
@@ -181,13 +164,12 @@ contract NFTMarketplace is ReentrancyGuard {
             tokenId,
             msg.sender,
             _title,
-            _summary,
             _category,
             _year
         );
 
         // Triggering the ProgramItemCreated event
-        emit ProgramItemCreated(programId, nftContract, tokenId, msg.sender, _title, _summary, _category, _year);
+        emit ProgramItemCreated(programId, nftContract, tokenId, msg.sender, _title, _category, _year);
     }
 
 

@@ -1,11 +1,125 @@
-import { Fragment, useRef, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import { useState } from "react";
+import { ethers } from "ethers";
+import { create as ipfsHttpClient } from 'ipfs-http-client'
+import { useRouter } from "next/router";
+import Web3Modal from "web3modal";
+import { Buffer } from 'buffer';
+import { NFTAddress, NFTMarketplaceAddress, projectId, projectSecret } from "../config";
+import NFT from "../abi/NFT.json";
+import NFTMarketplace from "../abi/NFTMarketplace.json";
+const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
+
+const client = ipfsHttpClient({
+    host: 'infura-ipfs.io',
+    port: 5001,
+    protocol: 'https',
+    headers: {
+        authorization: auth,
+    },
+});
 
 export default function CreateProfessional({ onClose, visible }) {
+
+    const [fileUrl, setFileUrl] = useState(null);
+    const [formInput, updateFormInput] = useState({ name: '', title: '', summary: '', twitterLink: '', githubLink: '', linkedinLink: '' });
+    const router = useRouter();
     
     const handleOnClose = () => {
         if(e.target.id === "container") onClose();
     };
+
+
+    /**
+     * On nft file change
+     * @param {event} e event
+     */
+    async function onChange(e) {
+        //selecting the first file, which is uploaded
+        const file = e.target.files[0];
+        try {
+            //uploading it to ipfs
+            const added = await client.add(
+                file,
+                {
+                    progress: (prog) => console.log(`received: ${prog}`)
+                }
+            );
+            //creating the url to fetch the uploaded file
+            const url = `https://infura-ipfs.io/ipfs/${added.path}`;
+
+            setFileUrl(url);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    /**
+     * Create a new professional profile.
+     */
+    async function createProf( ) {
+        //getting name, description from the formInput dictionary
+        const { name, title, summary, twitterLink, githubLink, linkedinLink } = formInput;
+
+        //If any of them is not present then it will not create the Professional Item
+        if (!name || !title || !summary || !fileUrl || !twitterLink || !githubLink || !linkedinLink ) return;
+
+        const data = JSON.stringify({
+            name, title, summary, twitterLink, githubLink, linkedinLink, image: fileUrl,
+        });
+
+        try {
+            //uploading the profile pic to ipfs
+            const added = await client.add(data);
+            //creating url to fetch the uploaded profile pic
+            const url = `https://infura-ipfs.io/ipfs/${added.path}`;
+            console.log(url)
+            console.log(added.path)
+            //listing the professional account
+            publishProfile(url, name, title);
+        } catch (error) {
+            console.log("Error in Uploading File:", error);
+        }
+    }
+
+    /**
+     * Creating the NFT Professional Profile. Calling the web 3.0 contracts here.
+     * @param {string} url ipfs url where professional profile pic is uploaded
+     */
+    async function publishProfile(url, name, title) {
+        const web3Modal = new Web3Modal();
+        const connection = await web3Modal.connect();
+        const provider = new ethers.providers.Web3Provider(connection);
+        const signer = provider.getSigner();
+
+        //NFT Contract
+        let contract = new ethers.Contract(NFTAddress, NFT, signer);
+        //minting the profile pic
+        let transaction = await contract.createToken(url);
+        //waiting for the minting transaction to finish
+        let tx = await transaction.wait();
+
+        let event = tx.events[0];
+        let value = event.args[2];
+        let tokenId = value.toNumber(); //Token Id Of the NFT
+
+
+        //NFT Marketplace Contract
+        contract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, signer);
+
+        //listing the account. 
+        transaction = await contract.createProfessional(
+            NFTAddress,
+            tokenId,
+            name,
+            title
+        );
+        //waiting for the transaction to complete
+        await transaction.wait();
+        console.log("completed")
+        //navigate back to home page
+        router.push('/');
+    }
 
     if (!visible) return null;
 
@@ -26,7 +140,7 @@ export default function CreateProfessional({ onClose, visible }) {
                                         <div className="w-24 h-24 mr-4 flex-none rounded-xl border overflow-hidden">
                                             <img
                                                 className="w-24 h-24 mr-4 object-cover"
-                                                src=""
+                                                src={fileUrl}
                                                 alt="Pic Upload"
                                             />
                                         </div>
@@ -34,7 +148,7 @@ export default function CreateProfessional({ onClose, visible }) {
                                             <span className="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-green-400 hover:bg-green-500 hover:shadow-lg">
                                                 Upload Photo
                                             </span>
-                                            <input type="file" className="hidden" />
+                                            <input type="file" name="Asset" accept="image/*" className="hidden" />
                                         </label>
                                     </div>
                                 </div>
@@ -49,8 +163,9 @@ export default function CreateProfessional({ onClose, visible }) {
                                             className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                                             required="required"
                                             type="text"
-                                            name="integration[shop_name]"
-                                            id="integration_shop_name"
+                                            name="professional_name"
+                                            id="professional_name"
+                                            onChange={e => updateFormInput({ ...formInput, name: e.target.value })}
                                         />
                                         <p className="text-red text-xs hidden">Please fill out this field.</p>
                                     </div>
@@ -65,6 +180,7 @@ export default function CreateProfessional({ onClose, visible }) {
                                             type="text"
                                             name="professional_title"
                                             id="professional_title"
+                                            onChange={e => updateFormInput({ ...formInput, title: e.target.value })}
                                         />
                                         <p className="text-red text-xs hidden">
                                             Please fill out this field.
@@ -101,6 +217,7 @@ export default function CreateProfessional({ onClose, visible }) {
                                             placeholder="https://"
                                             name="professional_linkedin"
                                             id="professional_linkedin"
+                                            onChange={e => updateFormInput({ ...formInput, linkedinLink: e.target.value })}
                                         />
                                     </div>
                                 </div>
@@ -132,8 +249,9 @@ export default function CreateProfessional({ onClose, visible }) {
                                             type="text"
                                             className="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow"
                                             placeholder="https://"
-                                            name="professional_twitter"
-                                            id="professional_twitter"
+                                            name="professional_github"
+                                            id="professional_github"
+                                            onChange={e => updateFormInput({ ...formInput, githubLink: e.target.value })}
                                         />
                                     </div>
                                 </div>
@@ -151,6 +269,7 @@ export default function CreateProfessional({ onClose, visible }) {
                                         placeholder="Enter your professional bio"
                                         spellCheck="false"
                                         defaultValue={""}
+                                        onChange={e => updateFormInput({ ...formInput, summary: e.target.value })}
                                     />
                                 </div>
 

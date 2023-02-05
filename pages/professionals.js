@@ -43,8 +43,6 @@ export default function Professionals() {
                 name: i.name,
                 title: i.title,
                 summary: i.summary,
-                category: i.category,
-                location: i.location,
                 twitterLink: i.twitterLink,
                 githubLink: i.githubLink,
                 linkedinLink: i.linkedinLink
