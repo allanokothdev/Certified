@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import useEthereum from '../useEthereum';
+import Link from 'next/link';
+
 
 export default function NavBar() {
 
@@ -33,16 +35,16 @@ export default function NavBar() {
                         <div className="w-auto hidden lg:block">
                             <ul className="flex items-center mr-16">
                                 <li className="mr-9 font-medium hover:text-indigo-600">
-                                    <a href="/">Home</a>
+                                    <Link href="/">Home</Link>
                                 </li>
                                 <li className="mr-9 font-medium hover:text-indigo-600">
-                                    <a href="programs">Programs</a>
+                                    <Link href="programs">Programs</Link>
                                 </li>
                                 <li className="mr-9 font-medium hover:text-indigo-600">
-                                    <a href="professionals">Professionals</a>
+                                    <Link href="professionals">Professionals</Link>
                                 </li>
                                 <li className="font-medium hover:text-indigo-600">
-                                    <a href="contact">Contacts</a>
+                                    <Link href="contact">Contacts</Link>
                                 </li>
                             </ul>
                         </div>

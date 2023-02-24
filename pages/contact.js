@@ -39,7 +39,6 @@ export default function Contact() {
                                 Send Email
                             </h3>
                             <p className="font-medium leading-relaxed">info@certified.com</p>
-                            <p className="font-medium leading-relaxed">support@certified.com</p>
                         </div>
                     </div>
                     <div className="w-full md:w-1/3 p-3">
@@ -67,7 +66,6 @@ export default function Contact() {
                                 Call Us
                             </h3>
                             <p className="font-medium leading-relaxed">+250 790 006118</p>
-                            <p className="font-medium leading-relaxed">+254 725 464827</p>
                         </div>
                     </div>
                     <div className="w-full md:w-1/3 p-3">
