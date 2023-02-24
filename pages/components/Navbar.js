@@ -11,7 +11,7 @@ export default function NavBar() {
 
     const Button = ({ children, onClick }) => {
         return (
-            <button onClick={onClick} className="inline-flex items-center w-full px-6 py-3 text-sm font-medium leading-4 text-white bg-indigo-600 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-indigo-500 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-indigo-600" type="button">{children}</button>
+            <button onClick={onClick} className="inline-flex items-center w-full px-6 py-3 text-sm font-bold leading-4 text-white bg-indigo-600 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-indigo-500 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-indigo-600" type="button">{children}</button>
         )
     }
 
@@ -54,7 +54,7 @@ export default function NavBar() {
                         <div className="w-auto hidden lg:block">
                             <div className="inline-block">
                                 {connected ? (
-                                    <Button >{address.toString().substring(0, 14)}</Button>
+                                    <Button >{address.toString().substring(0, 11)+"..."}</Button>
                                 ) : (
                                     <Button onClick={connect}>Connect Wallet</Button>
                                 )}

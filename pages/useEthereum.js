@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 const useEthereum = () => {
     const [address, setAddress] = useState();
     const [balance, setBalance] = useState(0);
+    const [signer, setSigner] = useState();
     const [connected, setConnected] = useState();
 
     const connect = async () => {
@@ -36,6 +37,7 @@ const useEthereum = () => {
             else {
                 const address = await signer.getAddress();
                 setAddress(address);
+                setSigner(signer);
                 setConnected(true);
             }
         }
