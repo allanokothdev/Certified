@@ -19,7 +19,7 @@ contract NFTMarketplace is ReentrancyGuard {
     uint256 listingPrice = 0.025 ether;
     address payable owner;
 
-    // Data Structure of a certificate
+    // Data Structure of a Profession
     struct Professional {
         uint256 professionalId;
         address userId;

@@ -50,6 +50,7 @@ export default function CreateItem() {
     }
 
     async function listNFTForSale() {
+
         const url = await uploadToIPFS()
         const web3Modal = new Web3Modal()
         const connection = await web3Modal.connect()

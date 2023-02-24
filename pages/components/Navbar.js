@@ -1,6 +1,19 @@
 import { useState, useEffect, useRef } from 'react'
+import useEthereum from '../useEthereum';
 
 export default function NavBar() {
+
+    const { connect, address, connected, checkConnection } = useEthereum();
+
+    useEffect (() => {
+        checkConnection();
+    });
+
+    const Button = ({ children, onClick }) => {
+        return (
+            <button onClick={onClick} className="inline-flex items-center w-full px-6 py-3 text-sm font-medium leading-4 text-white bg-indigo-600 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-indigo-500 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-indigo-600" type="button">{children}</button>
+        )
+    }
 
     return (
         <section className="overflow-hidden">
@@ -34,14 +47,17 @@ export default function NavBar() {
                             </ul>
                         </div>
                     </div>
-
                 </div>
 
                 <div className="w-auto">
                     <div className="flex flex-wrap items-center">
                         <div className="w-auto hidden lg:block">
                             <div className="inline-block">
-                                <a href="wallet" className="inline-flex items-center w-full px-6 py-3 text-sm font-medium leading-4 text-white bg-indigo-600 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-indigo-500 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-indigo-600">Sign In</a>
+                                {connected ? (
+                                    <Button >{address.toString().substring(0, 14)}</Button>
+                                ) : (
+                                    <Button onClick={connect}>Connect Wallet</Button>
+                                )}
                             </div>
                         </div>
                     </div>
