@@ -21,8 +21,8 @@ contract NFTMarketplace is ReentrancyGuard {
 
     // Data Structure of a Profession
     struct Professional {
-        uint256 professionalId;
-        address userId;
+        uint256 pid;
+        address uid;
         address nftContract;
         uint256 tokenId;
         string name;
@@ -31,20 +31,20 @@ contract NFTMarketplace is ReentrancyGuard {
 
     // Data Structure of a certificate
     struct Certificate {
-        uint256 certId;
+        uint256 cid;
         address nftContract;
         uint256 tokenId;
-        address student;
-        uint256 programId;
+        address uid;
+        uint256 pid;
         address publisher;
     }
 
     // Data Structure of a program
     struct Program {
-        uint256 programId;
+        uint256 pid;
         address nftContract;
         uint256 tokenId;
-        address publisher;
+        address uid;
         string title;
         string category;
         string year;
@@ -59,27 +59,27 @@ contract NFTMarketplace is ReentrancyGuard {
     mapping(uint256 => Professional) private professionalList;
 
     event CertificateItemCreated(
-        uint256 indexed certId,
+        uint256 indexed cid,
         address indexed nftContract,
         uint256 indexed tokenId,
-        address student,
-        uint256 programId,
+        address uid,
+        uint256 pid,
         address publisher
     );
 
     event ProgramItemCreated(
-        uint256 indexed programId,
+        uint256 indexed pid,
         address indexed nftContract,
         uint256 indexed tokenId,
-        address publisher,
+        address uid,
         string title,
         string category,
         string year
     );
 
     event ProfessionalItemCreated(
-        uint256 indexed professionalId,
-        address userId,
+        uint256 indexed pid,
+        address uid,
         address indexed nftContract,
         uint256 indexed tokenId,
         string name,
@@ -110,10 +110,10 @@ contract NFTMarketplace is ReentrancyGuard {
     {
         
         _professionalIds.increment();
-        uint256 professionalId = _professionalIds.current();
+        uint256 pid = _professionalIds.current();
 
-        professionalList[professionalId] = Professional(
-            professionalId,
+        professionalList[pid] = Professional(
+            pid,
             msg.sender,
             nftContract,
             tokenId,
@@ -122,7 +122,7 @@ contract NFTMarketplace is ReentrancyGuard {
         );
 
         // Triggering the ProfessionalItemCreated event
-        emit ProfessionalItemCreated(professionalId, msg.sender, nftContract, tokenId, _name, _title);
+        emit ProfessionalItemCreated(pid, msg.sender, nftContract, tokenId, _name, _title);
     }
 
 
@@ -138,7 +138,7 @@ contract NFTMarketplace is ReentrancyGuard {
 
         Professional[] memory items = new Professional[](itemCount);
         for (uint256 i = 0; i < totalItemCount; i++) {
-            uint256 currentId = professionalList[i + 1].professionalId;
+            uint256 currentId = professionalList[i + 1].pid;
             Professional storage currentItem = professionalList[currentId];
             items[currentIndex] = currentItem;
             currentIndex += 1;
@@ -156,10 +156,10 @@ contract NFTMarketplace is ReentrancyGuard {
     {
         
         _programIds.increment();
-        uint256 programId = _programIds.current();
+        uint256 pid = _programIds.current();
 
-        programList[programId] = Program(
-            programId,
+        programList[pid] = Program(
+            pid,
             nftContract,
             tokenId,
             msg.sender,
@@ -169,7 +169,7 @@ contract NFTMarketplace is ReentrancyGuard {
         );
 
         // Triggering the ProgramItemCreated event
-        emit ProgramItemCreated(programId, nftContract, tokenId, msg.sender, _title, _category, _year);
+        emit ProgramItemCreated(pid, nftContract, tokenId, msg.sender, _title, _category, _year);
     }
 
 
@@ -185,7 +185,7 @@ contract NFTMarketplace is ReentrancyGuard {
 
         Program[] memory items = new Program[](itemCount);
         for (uint256 i = 0; i < totalItemCount; i++) {
-            uint256 currentId = programList[i + 1].programId;
+            uint256 currentId = programList[i + 1].pid;
             Program storage currentItem = programList[currentId];
             items[currentIndex] = currentItem;
             currentIndex += 1;
@@ -196,19 +196,18 @@ contract NFTMarketplace is ReentrancyGuard {
     /// @notice Function for Creating a certificate on the Platform
     /// @param nftContract: NFT contract address
     /// @param tokenId: Token Id of the contract.
-    function createCertificate(address nftContract, address student_address, uint256 _programId, uint256 tokenId, uint256 price)
+    function createCertificate(address nftContract, address student_address, uint256 _programId, uint256 tokenId)
         public
         payable
         nonReentrant
     {
-        require(price > 0, "Price must be at least 1 wei");
         require(msg.value == listingPrice, "Price must be equal to listing price");
 
         _certIds.increment();
-        uint256 certId = _certIds.current();
+        uint256 cid = _certIds.current();
 
-        certificateList[certId] = Certificate(
-            certId,
+        certificateList[cid] = Certificate(
+            cid,
             nftContract,
             tokenId,
             student_address,
@@ -221,7 +220,7 @@ contract NFTMarketplace is ReentrancyGuard {
 
         // Triggering the CertificateItemCreated event
         emit CertificateItemCreated(
-            certId,
+            cid,
             nftContract,
             tokenId,
             student_address,
@@ -238,15 +237,15 @@ contract NFTMarketplace is ReentrancyGuard {
         uint256 currentIndex = 0;
 
         for (uint256 i = 0; i < totalItemCount; i++) {
-            if (certificateList[i + 1].student == _student_address) {
+            if (certificateList[i + 1].uid == _student_address) {
                 itemCount += 1;
             }
         }
 
         Certificate[] memory items = new Certificate[](itemCount);
         for (uint256 i = 0; i < totalItemCount; i++) {
-            if (certificateList[i + 1].student == _student_address) {
-                uint256 currentId = certificateList[i + 1].certId;
+            if (certificateList[i + 1].uid == _student_address) {
+                uint256 currentId = certificateList[i + 1].cid;
                 Certificate storage currentItem = certificateList[currentId];
                 items[currentIndex] = currentItem;
                 currentIndex += 1;
@@ -262,15 +261,15 @@ contract NFTMarketplace is ReentrancyGuard {
         uint256 currentIndex = 0;
 
         for (uint256 i = 0; i < totalItemCount; i++) {
-            if (certificateList[i + 1].programId == _programId) {
+            if (certificateList[i + 1].pid == _programId) {
                 itemCount += 1;
             }
         }
 
         Certificate[] memory items = new Certificate[](itemCount);
         for (uint256 i = 0; i < totalItemCount; i++) {
-            if (certificateList[i + 1].programId == _programId) {
-                uint256 currentId = certificateList[i + 1].certId;
+            if (certificateList[i + 1].pid == _programId) {
+                uint256 currentId = certificateList[i + 1].cid;
                 Certificate storage currentItem = certificateList[currentId];
                 items[currentIndex] = currentItem;
                 currentIndex += 1;

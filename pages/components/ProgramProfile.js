@@ -2,25 +2,26 @@ import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Web3Modal from "web3modal";
-import { nftAddress, nftMarketplaceAddress } from "../config";
+import { NFTAddress, NFTMarketplaceAddress } from "../../config";
+import NFT from "../../abi/NFT.json";
+import NFTMarketplace from "../../abi/NFTMarketplace.json";
 
-import NFT from "../abi/NFT.json";
-import NFTMarketplace from "../abi/NFTMarketplace.json";
-
-export default function ProgramProfile( program ) {
+const ProgramProfile = ({ program }) => {
 
     const [certificates, setCertificates] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded')
     const router = useRouter()
+
     useEffect(() => {
         loadCertificates()
     }, [])
+
     async function loadCertificates() {
 
         /* create a generic provider and query for this program's listed certificates  */
         const provider = new ethers.providers.JsonRpcProvider()
         const contract = new ethers.Contract(nftMarketplaceAddress, NFTMarketplace.abi, provider)
-        const data = await contract.fetchProgramCertificates(program.programId)
+        const data = await contract.fetchProgramCertificates(program?.programId)
 
         const items = await Promise.all(data.map(async i => {
             const tokenURI = await marketplaceContract.tokenURI(i.tokenId)
@@ -52,7 +53,7 @@ export default function ProgramProfile( program ) {
                     <div className="flex-none sm:flex">
                         <div className=" relative h-64 w-64 sm:mb-0 mb-3">
                             <img
-                                src={program.image}
+                                src={program?.image}
                                 alt="Program Image"
                                 className="w-64 h-64 object-cover rounded-2xl"
                             />
@@ -64,14 +65,14 @@ export default function ProgramProfile( program ) {
                                 <div className="flex items-center">
                                     <div className="flex flex-col pt-3">
                                         <div className="w-full flex-none text-lg text-gray-800 font-bold leading-none">
-                                            {program.title}
+                                            {program?.title}
                                         </div>
                                         <div className="flex-auto text-gray-500 my-1 pt-2">
-                                            <span className="mr-3">{program.category}</span>
+                                            <span className="mr-3">{program?.category}</span>
                                             <span className="mr-3 border-r border-gray-200  max-h-0" />
-                                            <span>{program.year}</span>
+                                            <span>{program?.year}</span>
                                         </div>
-                                        <p className="mt-1 w-96 text-sm text-slate-400 pt-2">{program.summary}</p>
+                                        <p className="mt-1 w-96 text-sm text-slate-400 pt-2">{program?.summary}</p>
                                     </div>
                                 </div>
                             </div>
@@ -114,5 +115,7 @@ export default function ProgramProfile( program ) {
 
         </div>
     )
-}
+};
+
+export default ProgramProfile;
 

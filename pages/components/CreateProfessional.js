@@ -4,9 +4,9 @@ import { create as ipfsHttpClient } from 'ipfs-http-client'
 import { useRouter } from "next/router";
 import Web3Modal from "web3modal";
 import { Buffer } from 'buffer';
-import { NFTAddress, NFTMarketplaceAddress, projectId, projectSecret } from "../config";
-import NFT from "../abi/NFT.json";
-import NFTMarketplace from "../abi/NFTMarketplace.json";
+import { NFTAddress, NFTMarketplaceAddress, projectId, projectSecret } from "../../config";
+import NFT from "../../abi/NFT.json";
+import NFTMarketplace from "../../abi/NFTMarketplace.json";
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
 
 const client = ipfsHttpClient({
@@ -18,14 +18,14 @@ const client = ipfsHttpClient({
     },
 });
 
-export default function CreateProfessional({ onClose, visible }) {
+const CreateProfessional = () => {
 
     const [fileUrl, setFileUrl] = useState(null);
     const [formInput, updateFormInput] = useState({ name: '', title: '', summary: '', twitterLink: '', githubLink: '', linkedinLink: '' });
     const router = useRouter();
-    
+
     const handleOnClose = () => {
-        if(e.target.id === "container") onClose();
+        if (e.target.id === "container") onClose();
     };
 
 
@@ -57,12 +57,12 @@ export default function CreateProfessional({ onClose, visible }) {
     /**
      * Create a new professional profile.
      */
-    async function createProf( ) {
+    async function createProf() {
         //getting name, description from the formInput dictionary
         const { name, title, summary, twitterLink, githubLink, linkedinLink } = formInput;
 
         //If any of them is not present then it will not create the Professional Item
-        if (!name || !title || !summary || !fileUrl || !twitterLink || !githubLink || !linkedinLink ) return;
+        if (!name || !title || !summary || !fileUrl || !twitterLink || !githubLink || !linkedinLink) return;
 
         const data = JSON.stringify({
             name, title, summary, twitterLink, githubLink, linkedinLink, image: fileUrl,
@@ -128,10 +128,12 @@ export default function CreateProfessional({ onClose, visible }) {
             <div className="max-w-md p-10 w-full space-y-8 bg-white rounded-xl shadow-lg z-10">
                 <div className="grid  gap-8 grid-cols-1">
                     <div className="flex flex-col ">
+
                         <div className="flex flex-col sm:flex-row items-center">
                             <h2 className="font-semibold text-lg mr-auto">Create Professional Account</h2>
                             <div className="w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0" />
                         </div>
+                        
                         <div className="mt-1">
                             <div className="form">
                                 <div className="md:space-y-2 mb-2">
@@ -290,6 +292,8 @@ export default function CreateProfessional({ onClose, visible }) {
         </div>
     )
 }
+
+export default CreateProfessional;
 
 
 

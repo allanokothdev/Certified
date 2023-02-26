@@ -1,14 +1,19 @@
 import React from 'react';
-import CreateProgram from './create-professional';
+import Link from 'next/link';
 
-export default function Home() {
+const Hero = () => {
+
+    const OpenPage = () => {
+        return (
+            <Link className="mb-8 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" href="/create-certificate">Get Started today!</Link>
+        )
+    }
 
     return (
         <section className="bg-blueGray-50">
             <div className="overflow-hidden pt-16 pb-16">
                 <div className="relative container px-4 mx-auto">
                     <div className="flex flex-wrap -m-8">
-
                         <div className="w-full md:w-1/2 lg:w-4/12 xl:w-6/12 p-8">
 
                             <h1 className="mb-8 text-6xl md:text-8xl lg:text-4xl font-bold font-heading md:max-w-2xl leading-none">
@@ -21,13 +26,9 @@ export default function Home() {
                                 </p>
 
                                 <div className="mb-2 md:inline-block">
-                                    <button onClick={< CreateProgram/>} className="mb-8 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200"
-                                        type="button"
-                                    >
-                                        Get Started today!
-                                    </button>
 
-                                    <h3 className=" text-gray-900 font-semibold">Trusted by top brands – Certified</h3>
+                                    <OpenPage />
+                                    <h3 className="mt-8 text-gray-900 font-semibold">Trusted by top brands – Certified</h3>
 
                                 </div>
 
@@ -95,7 +96,7 @@ export default function Home() {
                                 <div className="w-auto lg:w-1/3 xl:pt-28 p-3">
                                     <div className="flex flex-wrap justify-end">
                                         <div className="w-auto">
-                                            <img className="mx-auto transform hover:translate-y-16 transition ease-in-out duration-100"
+                                            <img className="mx-auto transform"
                                                 src="https://shuffle.dev/flaro-assets/images/headers/people.png"
                                                 alt=""
                                             />
@@ -107,14 +108,14 @@ export default function Home() {
                                     <div className="flex flex-wrap justify-center -m-3">
                                         <div className="w-auto p-3">
                                             <a>
-                                                <img className="mx-auto transform hover:translate-y-16 transition ease-in-out duration-100"
+                                                <img className="mx-auto transform"
                                                     src="https://shuffle.dev/flaro-assets/images/headers/video.png"
                                                     alt=""
                                                 />
                                             </a>
                                         </div>
                                         <div className="w-auto p-3">
-                                            <img className="mx-auto transform hover:translate-y-16 transition ease-in-out duration-100"
+                                            <img className="mx-auto transform"
                                                 src="https://shuffle.dev/flaro-assets/images/headers/people2.png"
                                                 alt=""
                                             />
@@ -126,7 +127,7 @@ export default function Home() {
                                 <div className="w-auto lg:w-1/3 p-3">
                                     <div className="flex flex-wrap">
                                         <div className="w-auto">
-                                            <img className="mx-auto transform hover:translate-y-16 transition ease-in-out duration-100"
+                                            <img className="mx-auto transform"
                                                 src="https://shuffle.dev/flaro-assets/images/headers/people3.png"
                                                 alt=""
                                             />
@@ -136,10 +137,11 @@ export default function Home() {
 
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </section>
     );
-}
+};
+
+export default Hero;

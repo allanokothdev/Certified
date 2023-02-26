@@ -6,7 +6,8 @@ const nextConfig = {
       config.resolve.fallback = {
         "fs": false,
         "net": false,
-        "tls": false
+        "tls": false,
+          // crypto: require.resolve("crypto-browserify"),
       }
     }
     return config

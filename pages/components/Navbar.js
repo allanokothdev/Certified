@@ -2,8 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import useEthereum from '../useEthereum';
 import Link from 'next/link';
 
-
-export default function NavBar() {
+const NavBar = () => {
 
     const { connect, address, connected, checkConnection } = useEthereum();
 
@@ -13,6 +12,7 @@ export default function NavBar() {
 
     const Button = ({ children, onClick }) => {
         return (
+            
             <button onClick={onClick} className="inline-flex items-center w-full px-6 py-3 text-sm font-bold leading-4 text-white bg-indigo-600 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-indigo-500 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-indigo-600" type="button">{children}</button>
         )
     }
@@ -35,16 +35,16 @@ export default function NavBar() {
                         <div className="w-auto hidden lg:block">
                             <ul className="flex items-center mr-16">
                                 <li className="mr-9 font-medium hover:text-indigo-600">
-                                    <Link href="/">Home</Link>
+                                    <Link href='/'>Home</Link>
                                 </li>
                                 <li className="mr-9 font-medium hover:text-indigo-600">
-                                    <Link href="programs">Programs</Link>
+                                    <Link href='/programs'>Programs</Link>
                                 </li>
                                 <li className="mr-9 font-medium hover:text-indigo-600">
-                                    <Link href="professionals">Professionals</Link>
+                                    <Link href='/professionals'>Professionals</Link>
                                 </li>
                                 <li className="font-medium hover:text-indigo-600">
-                                    <Link href="contact">Contacts</Link>
+                                    <Link href='/contact'>Contacts</Link>
                                 </li>
                             </ul>
                         </div>
@@ -69,6 +69,8 @@ export default function NavBar() {
 
         </section>
     );
-}
+};
+
+export default NavBar;
 
 

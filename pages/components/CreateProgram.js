@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CreateProgram() {
+const CreateProgram = () => {
 
     return (
         <div
@@ -129,5 +129,7 @@ export default function CreateProgram() {
         </div>
     );
 }
+
+export default CreateProgram;
 
 

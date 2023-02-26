@@ -1,12 +1,12 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import CreateProfessional from "./create-professional";
+import CreateProfessional from "./components/CreateProfessional";
 import { NFTMarketplaceAddress } from "../config";
 
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 
-export default function Professionals() {
+const professionals = () => {
 
     const [showModal, setShowModal] = useState(false);
     const [professionals, setProfessionals] = useState([]);
@@ -53,7 +53,7 @@ export default function Professionals() {
         setProfessionals(items);
         setLoadingState('loaded');
     }
-   // if (loadingState === 'loaded' && !professionals.length) return (<h1 className="py-10 px-20 text-3xl"> No Professionals have registered</h1>)
+    // if (loadingState === 'loaded' && !professionals.length) return (<h1 className="py-10 px-20 text-3xl"> No Professionals have registered</h1>)
 
     return (
         <div className="bg-white">
@@ -95,7 +95,9 @@ export default function Professionals() {
 
                 </div>
             </div>
-            <CreateProfessional onClose={handleOnClose} visible={showModal}/>
+            <CreateProfessional onClose={handleOnClose} visible={showModal} />
         </div>
     )
-}
+};
+
+export default professionals;

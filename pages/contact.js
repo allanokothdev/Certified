@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export default function Contact() {
+const contact = () => {
 
     return (
         <section className="relative pt-12 pb-16 bg-white overflow-hidden">
@@ -10,7 +10,7 @@ export default function Contact() {
                     Get connected
                 </h2>
                 <p className="mb-20 text-lg text-gray-600 text-center font-medium leading-normal md:max-w-lg mx-auto">
-                    Connect with Certified today and see how we can protect your Brands
+                    Connect with Certified today and see how we can protect your Brand's
                     Reputation from Fraudulent Certificates
                 </p>
                 <div className="flex flex-wrap -m-3">
@@ -108,19 +108,6 @@ export default function Contact() {
             </div>
         </section>
     );
-}
+};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default contact;

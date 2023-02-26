@@ -10,6 +10,10 @@ export default [
   {
     path: 'program',
     label: 'Programs'
+  },
+  {
+    path: 'program',
+    label: 'Programs'
   }
 ]
 

@@ -2,12 +2,12 @@ import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Web3Modal from "web3modal";
-import { nftAddress, nftMarketplaceAddress } from "../config";
+import { nftAddress, nftMarketplaceAddress } from "../../config";
 
-import NFT from "../abi/NFT.json";
-import NFTMarketplace from "../abi/NFTMarketplace.json";
+import NFT from "../../abi/NFT.json";
+import NFTMarketplace from "../../abi/NFTMarketplace.json";
 
-export default function ProfessionalProfile( professional ) {
+const ProfessionalProfile = ({ professional }) => {
 
     const [certificates, setCertificates] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded')
@@ -20,7 +20,7 @@ export default function ProfessionalProfile( professional ) {
         /* create a generic provider and query for this professional's listed certificates  */
         const provider = new ethers.providers.JsonRpcProvider()
         const contract = new ethers.Contract(nftMarketplaceAddress, NFTMarketplace.abi, provider)
-        const data = await contract.fetchProfessionalCertificates(professional.userId)
+        const data = await contract.fetchProfessionalCertificates(professional?.userId)
 
         const items = await Promise.all(data.map(async i => {
             const tokenURI = await marketplaceContract.tokenURI(i.tokenId)
@@ -29,8 +29,6 @@ export default function ProfessionalProfile( professional ) {
             let item = {
                 title: meta.data.title,
                 image: meta.data.image,
-                description: meta.data.description,
-                program: meta.data.program,
                 year: meta.data.year,
                 tokenId: i.tokenId.toNumber(),
                 student: i.student,
@@ -52,7 +50,7 @@ export default function ProfessionalProfile( professional ) {
                     <div className="flex-none sm:flex">
                         <div className=" relative h-64 w-64 sm:mb-0 mb-3">
                             <img
-                                src={professional.image}
+                                src={professional?.image}
                                 alt="Professional Profile Image"
                                 className="w-64 h-64 object-cover rounded-2xl"
                             />
@@ -64,14 +62,14 @@ export default function ProfessionalProfile( professional ) {
                                 <div className="flex items-center">
                                     <div className="flex flex-col pt-3">
                                         <div className="w-full flex-none text-lg text-gray-800 font-bold leading-none">
-                                            {professional.name}
+                                            {professional?.name}
                                         </div>
                                         <div className="flex-auto text-gray-500 my-1 pt-2">
-                                            <span className="mr-3">{professional.title}</span>
+                                            <span className="mr-3">{professional?.title}</span>
                                             <span className="mr-3 border-r border-gray-200  max-h-0" />
-                                            <span>{program.location}</span>
+                                            <span>{professional?.location}</span>
                                         </div>
-                                        <p className="mt-1 w-96 text-sm text-slate-400 pt-2">{program.summary}</p>
+                                        <p className="mt-1 w-96 text-sm text-slate-400 pt-2">{professional?.summary}</p>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +90,7 @@ export default function ProfessionalProfile( professional ) {
 
                             <div class="mt-1 p-2">
                                 <h2 class="text-slate-700">{certificate.title}</h2>
-                                <p class="mt-1 text-sm text-slate-400">{certificate.program}</p>
+                                <p class="mt-1 text-sm text-slate-400">{certificate.description}</p>
 
                                 <div class="mt-3 flex items-end justify-between">
                                     <p>
@@ -110,4 +108,6 @@ export default function ProfessionalProfile( professional ) {
         </div>
     )
 }
+
+export default ProfessionalProfile;
 
