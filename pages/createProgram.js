@@ -55,18 +55,22 @@ export default function createProgram() {
      * Publish Program Details on IPFS.
      */7
     async function publishOnIPFS() {
+        console.log("publish on IPFS");
         const { title, summary, year, category } = formInput
-        if (!title || !summary || !year ||!category || !fileUrl) return
+        if (!title || !summary || !year || !category || !fileUrl) return
         /* first, upload to IPFS */
         const data = JSON.stringify({
             title, summary, category, year, image: fileUrl
         })
+
+        console.log("Add IPFS Metadata");
 
         try {
             //uploading the certificate to ipfs
             const added = await client.add(data);
             //creating url to fetch the uploaded certificate
             const url = `https://infura-ipfs.io/ipfs/${added.path}`;
+            
             console.log(url)
             console.log(added.path)
             //listing the certificate or marking it as sale
@@ -80,7 +84,7 @@ export default function createProgram() {
      * Creating the NFT. Calling the web 3.0 contracts here.
      * @param {string} url ipfs url where certificate is uploaded
      */
-    async function publishProgram(url, title, category, year) {
+     async function publishProgram(url, title, category, year) {
         const web3Modal = new Web3Modal();
         const connection = await web3Modal.connect();
         const provider = new ethers.providers.Web3Provider(connection);
@@ -120,15 +124,17 @@ export default function createProgram() {
         <div className="relative min-h-screen flex items-center justify-center bg-center bg-gray-200 py-12 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-cover">
             
             <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
-                <div className="grid  gap-8 grid-cols-1">
-                    <div className="flex flex-col">
+                    <div className="grid  gap-8 grid-cols-1">
+                        <div className="flex flex-col">
                         
-                        <div className="flex flex-col sm:flex-row items-center">
-                            <h2 className="font-semibold text-lg mr-auto">Create Program</h2>
-                            <div className="w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0" />
-                        </div>
+                            <div className="flex flex-col sm:flex-row items-center">
+                                <h2 className="font-semibold text-lg mr-auto">Create Program</h2>
+                                <div className="w-full sm:w-auto sm:ml-auto mt-3 sm:mt-0" />
+                            </div>
+
                         <div className="mt-5">
                             <div className="form">
+                                
                                 <div className="md:space-y-2 mb-3">
 
                                     <div className="flex items-center py-2">
@@ -145,7 +151,7 @@ export default function createProgram() {
                                             </span>
                                             <input type="file" className="hidden" accept="image/*" onChange={onChange}/>
                                         </label>
-                                    </div>
+                                    </div> 
                                 </div>
 
                                 <div className="mb-3 space-y-2 w-full text-xs">
@@ -160,35 +166,33 @@ export default function createProgram() {
                                         id="program_title"
                                         onChange={e => updateFormInput({ ...formInput, title: e.target.value })}
                                     />
-                           <p className="text-red text-xs hidden">
-                                        Please fill out this field.
-                                    </p>
+                                    <p className="text-red text-xs hidden">Please fill out this field.</p>
                                 </div>
 
                                 <div className="w-full flex flex-col mb-3 text-xs">
-                                    <label className="font-semibold text-gray-600 py-2">  Select Category <abbr title="required">*</abbr></label>
-                                    <select className="block w-full bg-white text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full " required="required" name="category" id="category">
-                                        <option value="">Bootcamp</option>
-                                        <option value="">Competition</option>
-                                        <option value="">Conference</option>
-                                        <option value="">Course</option>
-                                        <option value="">Exchange Program</option>
-                                        <option value="">Fellowship</option>
-                                        <option value="">Grad School</option>
-                                        <option value="">Hackathon</option>
-                                        <option value="">High School</option>
-                                        <option value="">Internship</option>
-                                        <option value="">Masters</option>
-                                        <option value="">Undergraduate</option>
-                                        <option value="">Primary School</option>
-                                        onChange={e => updateFormInput({ ...formInput, category: e.target.value })}
-                                    </select>
+                                        <label className="font-semibold text-gray-600 py-2">  Select Category <abbr title="required">*</abbr></label>
+                                        <select className="block w-full bg-white text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full " required="required" name="category" id="category">
+                                            <option value="">Bootcamp</option>
+                                            <option value="">Competition</option>
+                                            <option value="">Conference</option>
+                                            <option value="">Course</option>
+                                            <option value="">Exchange Program</option>
+                                            <option value="">Fellowship</option>
+                                            <option value="">Grad School</option>
+                                            <option value="">Hackathon</option>
+                                            <option value="">High School</option>
+                                            <option value="">Internship</option>
+                                            <option value="">Masters</option>
+                                            <option value="">Undergraduate</option>
+                                            <option value="">Primary School</option>
+                                            onChange={e => updateFormInput({ ...formInput, category: e.target.value })}
+                                        </select>
                                     <p className="text-sm text-red-500 hidden mt-3" id="error">Please fill out this field.</p>
                                 </div>
 
                                 <div className="w-full flex flex-col mb-3 text-xs">
                                     <label className="font-semibold text-gray-600 py-2">  Select Year <abbr title="required">*</abbr></label>
-                                    <select className="block w-full bg-white text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full " required="required" name="program_year" id="program_year">
+                                    <select className="block w-full bg-white text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full " required="required" name="year" id="year">
                                         <option value="">2025</option>
                                         <option value="">2024</option>
                                         <option value="">2023</option>
@@ -228,8 +232,7 @@ export default function createProgram() {
 
                                 <div className="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
                                     
-                                    <button onClick={publishOnIPFS} className="mb-2 md:mb-0 bg-indigo-600 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-indigo-400">
-                                        Publish
+                                    <button onClick={publishOnIPFS} className="mb-2 md:mb-0 bg-indigo-600 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-indigo-400">Publish
                                     </button>
                                 </div>
                             </div>
