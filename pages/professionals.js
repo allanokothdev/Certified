@@ -1,9 +1,9 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { NFTMarketplaceAddress } from "../config";
-
+import { NFTAddress, NFTMarketplaceAddress } from "../config";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
+import NFT from "../abi/NFT.json";
 import ProfessionalBanner from "./components/ProfessionalBanner";
 
 const professionals = () => {
@@ -23,8 +23,9 @@ const professionals = () => {
     async function loadProfessionals() {
         /* create a generic provider and query for listed programs items */
         const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com")
-        const contract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, provider)
-        const data = await contract.fetchProfessionals()
+        const marketplaceContract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, provider);
+        const tokenContract = new ethers.Contract(NFTAddress, NFT, provider);
+        const data = await marketplaceContract.fetchProfessionals()
 
         const items = await Promise.all(data.map(async i => {
             //getting the ipfs url of each certificate item

@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Web3Modal from "web3modal";
-import { nftAddress, nftMarketplaceAddress } from "../../config";
+import { NFTAddress, nftMarketplaceAddress } from "../../config";
 
 import NFT from "../../abi/NFT.json";
 import NFTMarketplace from "../../abi/NFTMarketplace.json";
@@ -19,11 +19,12 @@ const ProfessionalProfile = ({ professional }) => {
 
         /* create a generic provider and query for this professional's listed certificates  */
         const provider = new ethers.providers.JsonRpcProvider()
-        const contract = new ethers.Contract(nftMarketplaceAddress, NFTMarketplace.abi, provider)
-        const data = await contract.fetchProfessionalCertificates(professional?.userId)
+        const marketplaceContract = new ethers.Contract(nftMarketplaceAddress, NFTMarketplace, provider)
+        const data = await marketplaceContract.fetchProfessionalCertificates(professional?.userId);
+        const tokenContract = new ethers.Contract(NFTAddress, NFT, provider);
 
         const items = await Promise.all(data.map(async i => {
-            const tokenURI = await marketplaceContract.tokenURI(i.tokenId)
+            const tokenURI = await tokenContract.tokenURI(i.tokenId)
             const meta = await axios.get(tokenURI)
 
             let item = {

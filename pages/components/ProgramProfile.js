@@ -20,11 +20,12 @@ const ProgramProfile = ({ program }) => {
 
         /* create a generic provider and query for this program's listed certificates  */
         const provider = new ethers.providers.JsonRpcProvider()
-        const contract = new ethers.Contract(nftMarketplaceAddress, NFTMarketplace.abi, provider)
-        const data = await contract.fetchProgramCertificates(program?.programId)
+        const marketplaceContract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, provider)
+        const tokenContract = new ethers.Contract(NFTAddress, NFT, provider);
+        const data = await marketplaceContract.fetchProgramCertificates(program?.programId)
 
         const items = await Promise.all(data.map(async i => {
-            const tokenURI = await marketplaceContract.tokenURI(i.tokenId)
+            const tokenURI = await tokenContract.tokenURI(i.tokenId)
             const meta = await axios.get(tokenURI)
 
             let item = {

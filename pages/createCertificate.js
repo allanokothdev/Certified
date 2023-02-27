@@ -8,6 +8,7 @@ import Web3Modal from "web3modal";
 import { Buffer } from 'buffer'
 import { NFTAddress, NFTMarketplaceAddress, projectId, projectSecret } from "../config";
 import NFT from "../abi/NFT.json";
+import { useRouter } from 'next/router'
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
 
@@ -26,7 +27,7 @@ export default function CreateCertificate() {
 
     const [fileUrl, setFileUrl] = useState(null);
     const [formInput, updateFormInput] = useState({ title: '', summary: program?.title, student: '', year: program?.year, pid: program?.pid })
-
+    const router = useRouter();
     /**
      * On nft file change
      * @param {event} e event

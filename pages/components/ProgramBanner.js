@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import useEthereum from '../useEthereum';
 import Link from 'next/link';
-import { render } from 'react-dom';
 
 const ProgramBanner = () => {
 
@@ -11,7 +10,7 @@ const ProgramBanner = () => {
         )
     }
 
-    render (
+    return (
         <div className="w-full dark:bg-gray-500"
             style={{
                 backgroundImage: "url('https://source.unsplash.com/random/640x480')",

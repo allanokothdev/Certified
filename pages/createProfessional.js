@@ -55,15 +55,20 @@ export default function createProfessional() {
      * Create a new professional profile.
      */
     async function publishOnIPFS() {
+        console.log("Step One")
         //getting name, description from the formInput dictionary
         const { name, title, summary, location, twitterLink, githubLink, linkedinLink } = formInput;
 
+        console.log("Step Two")
         //If any of them is not present then it will not create the Professional Item
         if (!name || !title || !summary ||!location || !fileUrl || !twitterLink || !githubLink || !linkedinLink) return;
 
+        console.log("Step Three")
         const data = JSON.stringify({
             name, title, summary, location, twitterLink, githubLink, linkedinLink, image: fileUrl,
         });
+
+        console.log("Step Four")
 
         try {
             //uploading the profile pic to ipfs
@@ -84,10 +89,13 @@ export default function createProfessional() {
      * @param {string} url ipfs url where professional profile pic is uploaded
      */
     async function publishProfile(url, name, title) {
+        console.log("Step Five")
         const web3Modal = new Web3Modal();
         const connection = await web3Modal.connect();
         const provider = new ethers.providers.Web3Provider(connection);
         const signer = provider.getSigner();
+
+        console.log("Step Six")
 
         //NFT Contract
         let contract = new ethers.Contract(NFTAddress, NFT, signer);

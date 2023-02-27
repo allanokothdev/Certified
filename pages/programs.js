@@ -1,14 +1,17 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { NFTMarketplaceAddress } from "../config";
+import cors from "cors";
 import ProgramBanner from "./components/ProgramBanner";
+import { NFTAddress, NFTMarketplaceAddress } from "../config";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
+import NFT from "../abi/NFT.json";
 
 const programs = () => {
 
     const [programList, setProgramList] = useState([]);
     const [loadingState, setLoadingState] = useState('not-loaded');
+    app.use(cors());
 
     useEffect(() => {
         //load professionals when web page loads
@@ -23,8 +26,9 @@ const programs = () => {
 
         /* create a generic provider and query for listed programs items */
         const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com")
-        const contract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, provider)
-        const data = await contract.fetchPrograms()
+        const marketplaceContract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, provider)
+        const tokenContract = new ethers.Contract(NFTAddress, NFT, provider);
+        const data = await marketplaceContract.fetchPrograms()
 
         const items = await Promise.all(data.map(async i => {
             //getting the ipfs url of each program pic item
@@ -32,14 +36,15 @@ const programs = () => {
             //fetching the ipfs url, which will return a meta json
             const meta = await axios.get(tokenURI);
 
+            console.log(meta.toString());
+
             let item = {
                 tokenId: i.tokenId.toNumber(),
-                id: i.pid,
                 address: i.uid,
                 pic: meta.data.image,
                 title: meta.data.title,
                 summary: meta.data.summary,
-                year: i.year
+                year: meta.data.year
             };
             return item;
         }));
