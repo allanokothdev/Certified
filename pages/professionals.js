@@ -8,7 +8,6 @@ import NFTMarketplace from "../abi/NFTMarketplace.json";
 
 const professionals = () => {
 
-    const [showModal, setShowModal] = useState(false);
     const [professionals, setProfessionals] = useState([]);
     const [loadingState, setLoadingState] = useState('not-loaded');
 
@@ -16,8 +15,6 @@ const professionals = () => {
         //load professionals when web page loads
         loadProfessionals();
     }, []);
-
-    const handleOnClose = () => setShowModal(false);
 
     /**
      * Load the current user Nft
@@ -37,8 +34,8 @@ const professionals = () => {
 
             let item = {
                 tokenId: i.tokenId.toNumber(),
-                id: i.professionalId,
-                address: i.userId,
+                id: i.pid,
+                address: i.uid,
                 pic: meta.data.image,
                 name: i.name,
                 title: i.title,
@@ -47,18 +44,18 @@ const professionals = () => {
                 githubLink: i.githubLink,
                 linkedinLink: i.linkedinLink
             };
-            return item;
+            return item; 
         }));
 
         setProfessionals(items);
         setLoadingState('loaded');
     }
+
     // if (loadingState === 'loaded' && !professionals.length) return (<h1 className="py-10 px-20 text-3xl"> No Professionals have registered</h1>)
 
     return (
         <div className="bg-white">
-            <button onClick={() => setShowModal(true)} className="justify-self-end mx-10 mt-4 py-2 px-10 text-white font-semibold border border-black rounded-xl md:rounded-full focus:ring focus:ring-black bg-black hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Create Professional Account</button>
-
+            <button className="justify-self-end mx-10 mt-4 py-2 px-10 text-white font-semibold border border-black rounded-xl md:rounded-full focus:ring focus:ring-black bg-black hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Create Professional Account</button>
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
@@ -95,9 +92,8 @@ const professionals = () => {
 
                 </div>
             </div>
-            <CreateProfessional onClose={handleOnClose} visible={showModal} />
         </div>
-    )
+    ) 
 };
 
 export default professionals;

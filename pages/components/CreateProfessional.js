@@ -124,7 +124,7 @@ const CreateProfessional = () => {
     if (!visible) return null;
 
     return (
-        <div id='container' onClick={handleOnClose} className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm min-h-screen flex items-center justify-center">
+        <div id='container' className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm min-h-screen flex items-center justify-center">
             <div className="max-w-md p-10 w-full space-y-8 bg-white rounded-xl shadow-lg z-10">
                 <div className="grid  gap-8 grid-cols-1">
                     <div className="flex flex-col ">

@@ -25,15 +25,7 @@ const client = ipfsHttpClient({
 const CreateCertificate = ({ program }) => {
 
     const [fileUrl, setFileUrl] = useState(null);
-    const [formInput, updateFormInput] = useState({ title: '', description: program?.title, student: '', year: program?.year, programId: program?.programId })
-
-    useEffect(
-        () =>
-            onSnapshot(doc(db, "posts", id), (snapshot) => {
-                setPost(snapshot.data());
-            }),
-        [firestore]
-    )
+    const [formInput, updateFormInput] = useState({ title: '', description: program?.title, student: '', year: program?.year, pid: program?.pid })
 
     /**
      * On nft file change
@@ -63,11 +55,11 @@ const CreateCertificate = ({ program }) => {
      * Create a new certificate.
      */
     async function publishOnIPFS() {
-        const { title, description, year, programId, student } = formInput
+        const { title, description, year, pid, student } = formInput
         if (!title || !student || !fileUrl) return
         /* first, upload to IPFS */
         const data = JSON.stringify({
-            title, description, programId, year, image: fileUrl
+            title, description, pid, year, image: fileUrl
         })
 
         try {
@@ -78,7 +70,7 @@ const CreateCertificate = ({ program }) => {
             console.log(url)
             console.log(added.path)
             //listing the certificate or marking it as sale
-            publishCertificate(url, student, programId);
+            publishCertificate(url, student, pid);
         } catch (error) {
             console.log("Error in Uploading File:", error);
         }
@@ -88,7 +80,7 @@ const CreateCertificate = ({ program }) => {
      * Creating the NFT and Making it to sale. Calling the web 3.0 contracts here.
      * @param {string} url ipfs url where certificate is uploaded
      */
-    async function publishCertificate(url, student, programId) {
+    async function publishCertificate(url, student, pid) {
         const web3Modal = new Web3Modal();
         const connection = await web3Modal.connect();
         const provider = new ethers.providers.Web3Provider(connection);
@@ -113,7 +105,7 @@ const CreateCertificate = ({ program }) => {
         transaction = await contract.createCertificate(
             NFTAddress,
             student,
-            programId,
+            pid,
             tokenId
         );
         //waiting for the transaction to complete
