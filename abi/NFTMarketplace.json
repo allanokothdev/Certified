@@ -1,16 +1,11 @@
 [
 	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
 		"anonymous": false,
 		"inputs": [
 			{
 				"indexed": true,
 				"internalType": "uint256",
-				"name": "certId",
+				"name": "cid",
 				"type": "uint256"
 			},
 			{
@@ -28,13 +23,13 @@
 			{
 				"indexed": false,
 				"internalType": "address",
-				"name": "student",
+				"name": "uid",
 				"type": "address"
 			},
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "programId",
+				"name": "pid",
 				"type": "uint256"
 			},
 			{
@@ -53,13 +48,13 @@
 			{
 				"indexed": true,
 				"internalType": "uint256",
-				"name": "professionalId",
+				"name": "pid",
 				"type": "uint256"
 			},
 			{
 				"indexed": false,
 				"internalType": "address",
-				"name": "userId",
+				"name": "uid",
 				"type": "address"
 			},
 			{
@@ -85,36 +80,6 @@
 				"internalType": "string",
 				"name": "title",
 				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "summary",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "location",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "twitterLink",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "githubLink",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "linkedinLink",
-				"type": "string"
 			}
 		],
 		"name": "ProfessionalItemCreated",
@@ -126,7 +91,7 @@
 			{
 				"indexed": true,
 				"internalType": "uint256",
-				"name": "programId",
+				"name": "pid",
 				"type": "uint256"
 			},
 			{
@@ -144,19 +109,13 @@
 			{
 				"indexed": false,
 				"internalType": "address",
-				"name": "publisher",
+				"name": "uid",
 				"type": "address"
 			},
 			{
 				"indexed": false,
 				"internalType": "string",
 				"name": "title",
-				"type": "string"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "summary",
 				"type": "string"
 			},
 			{
@@ -196,11 +155,6 @@
 				"internalType": "uint256",
 				"name": "tokenId",
 				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "price",
-				"type": "uint256"
 			}
 		],
 		"name": "createCertificate",
@@ -229,31 +183,6 @@
 				"internalType": "string",
 				"name": "_title",
 				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_summary",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_location",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_twitterLink",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_githubLink",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_linkedinLink",
-				"type": "string"
 			}
 		],
 		"name": "createProfessional",
@@ -280,11 +209,6 @@
 			},
 			{
 				"internalType": "string",
-				"name": "_summary",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
 				"name": "_category",
 				"type": "string"
 			},
@@ -302,6 +226,24 @@
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "_listingPrice",
+				"type": "uint256"
+			}
+		],
+		"name": "updateListingPrice",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "_student_address",
 				"type": "address"
@@ -313,7 +255,7 @@
 				"components": [
 					{
 						"internalType": "uint256",
-						"name": "certId",
+						"name": "cid",
 						"type": "uint256"
 					},
 					{
@@ -328,12 +270,12 @@
 					},
 					{
 						"internalType": "address",
-						"name": "student",
+						"name": "uid",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "programId",
+						"name": "pid",
 						"type": "uint256"
 					},
 					{
@@ -358,12 +300,12 @@
 				"components": [
 					{
 						"internalType": "uint256",
-						"name": "professionalId",
+						"name": "pid",
 						"type": "uint256"
 					},
 					{
 						"internalType": "address",
-						"name": "userId",
+						"name": "uid",
 						"type": "address"
 					},
 					{
@@ -384,31 +326,6 @@
 					{
 						"internalType": "string",
 						"name": "title",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "summary",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "location",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "twitterLink",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "githubLink",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "linkedinLink",
 						"type": "string"
 					}
 				],
@@ -434,7 +351,7 @@
 				"components": [
 					{
 						"internalType": "uint256",
-						"name": "certId",
+						"name": "cid",
 						"type": "uint256"
 					},
 					{
@@ -449,12 +366,12 @@
 					},
 					{
 						"internalType": "address",
-						"name": "student",
+						"name": "uid",
 						"type": "address"
 					},
 					{
 						"internalType": "uint256",
-						"name": "programId",
+						"name": "pid",
 						"type": "uint256"
 					},
 					{
@@ -479,7 +396,7 @@
 				"components": [
 					{
 						"internalType": "uint256",
-						"name": "programId",
+						"name": "pid",
 						"type": "uint256"
 					},
 					{
@@ -494,17 +411,12 @@
 					},
 					{
 						"internalType": "address",
-						"name": "publisher",
+						"name": "uid",
 						"type": "address"
 					},
 					{
 						"internalType": "string",
 						"name": "title",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "summary",
 						"type": "string"
 					},
 					{
@@ -537,19 +449,6 @@
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_listingPrice",
-				"type": "uint256"
-			}
-		],
-		"name": "updateListingPrice",
-		"outputs": [],
-		"stateMutability": "payable",
 		"type": "function"
 	}
 ]
