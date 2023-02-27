@@ -1,10 +1,10 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import CreateProfessional from "./components/CreateProfessional";
 import { NFTMarketplaceAddress } from "../config";
 
 import NFTMarketplace from "../abi/NFTMarketplace.json";
+import ProfessionalBanner from "./components/ProfessionalBanner";
 
 const professionals = () => {
 
@@ -55,14 +55,14 @@ const professionals = () => {
 
     return (
         <div className="bg-white">
-            <button className="justify-self-end mx-10 mt-4 py-2 px-10 text-white font-semibold border border-black rounded-xl md:rounded-full focus:ring focus:ring-black bg-black hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Create Professional Account</button>
+            <ProfessionalBanner/>
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
                     {professionals.map((professional) => (
                         <div key={professional.id} className="w-full border border-gray-200 rounded-lg shadow-sm">
                             <div className="flex flex-col items-center justify-center p-10">
-                                <img alt="allan" className="w-32 h-32 mb-6 rounded-full" src={professional.pic} />
+                                <img alt=" " className="w-32 h-32 mb-6 rounded-full" src={professional.pic} />
                                 <h2 className="text-lg font-medium">{professional.name}</h2>
                                 <p className="font-medium text-blue-500">{professional.title}</p>
                             </div>

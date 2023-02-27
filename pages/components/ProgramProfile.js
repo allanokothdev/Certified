@@ -30,13 +30,12 @@ const ProgramProfile = ({ program }) => {
             let item = {
                 title: meta.data.title,
                 image: meta.data.image,
-                description: meta.data.description,
+                description: meta.data.summary,
                 program: meta.data.program,
                 year: meta.data.year,
                 tokenId: i.tokenId.toNumber(),
-                student: i.student,
-                programId: i.programId,
-                publisher: i.publisher
+                student: i.uid,
+                programId: i.pid
             };
             return item;
         }))

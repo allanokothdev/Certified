@@ -28,12 +28,12 @@ const ProfessionalProfile = ({ professional }) => {
 
             let item = {
                 title: meta.data.title,
+                summary: meta.data.summary,
                 image: meta.data.image,
                 year: meta.data.year,
                 tokenId: i.tokenId.toNumber(),
-                student: i.student,
-                programId: i.programId,
-                publisher: i.publisher
+                student: i.uid,
+                programId: i.pid
             };
             return item;
         }))
