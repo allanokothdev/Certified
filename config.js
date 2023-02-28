@@ -8,6 +8,7 @@ export const TESTNET = 'https://rpc-mumbai.maticvigil.com';
 
 export const projectId = '2Enco3F0isU6oqRCudsOLWE0i0f';
 
+//Testing Account, No Real Tokens
 export const privateKey = '28c79b842a827fd27d66806d4662b259be4b23f4d732564c32ff900122bc0637';
 
 export const projectSecret = '44a9030051c175b771a9892c3b67c602';
