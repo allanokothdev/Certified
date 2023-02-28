@@ -12,7 +12,6 @@ import { useRouter } from 'next/router'
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
 
-
 const client = ipfsHttpClient({
     host: 'infura-ipfs.io',
     port: 5001,
