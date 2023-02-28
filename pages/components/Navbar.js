@@ -18,7 +18,7 @@ const NavBar = () => {
     }
 
     return (
-        <section className="overflow-hidden">
+        <section className="overflow-hidden sticky top-0">
             <div className="flex items-center justify-between py-5 bg-white px-10">
                 <div className="w-auto">
                     <div className="flex flex-wrap items-center">

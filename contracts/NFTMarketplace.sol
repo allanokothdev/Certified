@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: Unlicense
+// SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -202,6 +202,8 @@ contract NFTMarketplace is ReentrancyGuard {
         nonReentrant
     {
         require(msg.value == listingPrice, "Price must be equal to listing price");
+        assert(programList[_programId].uid == msg.sender);
+        payable(owner).transfer(listingPrice);
 
         _certIds.increment();
         uint256 cid = _certIds.current();

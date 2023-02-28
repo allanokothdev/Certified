@@ -13,7 +13,7 @@ const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('b
 
 
 const client = ipfsHttpClient({
-    host: 'ipfs.io',
+    host: 'ipfs.infura.io',
     port: 5001,
     protocol: 'https',
     headers: {

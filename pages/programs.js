@@ -1,7 +1,6 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import cors from "cors";
 import ProgramBanner from "./components/ProgramBanner";
 import { NFTAddress, NFTMarketplaceAddress } from "../config";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
@@ -11,7 +10,6 @@ const programs = () => {
 
     const [programList, setProgramList] = useState([]);
     const [loadingState, setLoadingState] = useState('not-loaded');
-    app.use(cors());
 
     useEffect(() => {
         //load professionals when web page loads
