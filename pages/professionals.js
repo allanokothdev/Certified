@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { NFTAddress, NFTMarketplaceAddress } from "../config";
+import { TESTNET, NFTAddress, NFTMarketplaceAddress } from "../config";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 import NFT from "../abi/NFT.json";
 import ProfessionalBanner from "./components/ProfessionalBanner";
@@ -22,7 +22,7 @@ const professionals = () => {
      */
     async function loadProfessionals() {
         /* create a generic provider and query for listed programs items */
-        const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com")
+        const provider = new ethers.providers.JsonRpcProvider(TESTNET)
         const marketplaceContract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, provider);
         const tokenContract = new ethers.Contract(NFTAddress, NFT, provider);
         const data = await marketplaceContract.fetchProfessionals()
@@ -55,17 +55,17 @@ const professionals = () => {
     // if (loadingState === 'loaded' && !professionals.length) return (<h1 className="py-10 px-20 text-3xl"> No Professionals have registered</h1>)
 
     return (
-        <div className="bg-white">
+        <div className="bg-gray-200">
             <ProfessionalBanner/>
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
                     {professionals.map((professional) => (
-                        <div key={professional.id} className="w-full border border-gray-200 rounded-lg shadow-sm">
+                        <div key={professional.id} className="w-full border bg-white border-gray-200 rounded-lg shadow-sm">
                             <div className="flex flex-col items-center justify-center p-10">
-                                <img alt=" " className="w-32 h-32 mb-6 rounded-full" src={professional.pic} />
-                                <h2 className="text-lg font-medium">{professional.name}</h2>
-                                <p className="font-medium text-blue-500">{professional.title}</p>
+                                <img alt=" " className="w-32 h-32 mb-6 rounded-full object-cover" src={professional.pic} />
+                                <h2 className="text-lg font-medium line-clamp-1">{professional.name}</h2>
+                                <p className="font-medium text-blue-500 line-clamp-1">{professional.title}</p>
                             </div>
                             <div className="flex border-t border-gray-200 divide-x divide-gray-200">
                                 <a href={professional.twitterLink} className="flex-1 block p-5 text-center text-gray-300 transition duration-200 ease-out hover:bg-gray-100 hover:text-gray-500" target="_blank" rel="noreferrer">

@@ -24,7 +24,7 @@ const client = ipfsHttpClient({
 export default function createProgram() {
 
     const [fileUrl, setFileUrl] = useState(null);
-    const [formInput, updateFormInput] = useState({ title: 'Title', summary: 'Summary', category: 'Program', year: '2023' })
+    const [formInput, updateFormInput] = useState({ title: '', summary: '', category: '', year: '' })
     const router = useRouter();
     /**
      * On nft file change
@@ -55,19 +55,20 @@ export default function createProgram() {
      * Publish Program Details on IPFS.
      */7
     async function publishOnIPFS() {
-        console.log("Step One")
         const { title, summary, year, category } = formInput
+
+        console.log(title);
+        console.log(summary);
+        console.log(year);
+        console.log(category);
 
         console.log("Step Two")
         if ( !title || !summary || !year || !category || !fileUrl) return
 
-        console.log("Step Three") 
         /* first, upload to IPFS */
         const data = JSON.stringify({
             title, summary, category, year, image: fileUrl
         })
-
-        console.log("Step Four")
 
         try {
             //uploading the certificate to ipfs
@@ -121,7 +122,7 @@ export default function createProgram() {
         await transaction.wait();
         console.log("completed")
         //navigate back to home page
-        router.push('/');
+        router.push('/programs');
     }
 
     return (
@@ -176,19 +177,19 @@ export default function createProgram() {
                                 <div className="w-full flex flex-col mb-3 text-xs">
                                     <label className="font-semibold text-gray-600 py-2">  Select Category <abbr title="required">*</abbr></label>
                                     <select className="block w-full bg-white text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full " required="required" name="category" id="category" onChange={e => updateFormInput({ ...formInput, category: e.target.value })}>
-                                        <option value="">Bootcamp</option>
-                                        <option value="">Competition</option>
-                                        <option value="">Conference</option>
-                                        <option value="">Course</option>
-                                        <option value="">Exchange Program</option>
-                                        <option value="">Fellowship</option>
-                                        <option value="">Grad School</option>
-                                        <option value="">Hackathon</option>
-                                        <option value="">High School</option>
-                                        <option value="">Internship</option>
-                                        <option value="">Masters</option>
-                                        <option value="">Undergraduate</option>
-                                        <option value="">Primary School</option>
+                                        <option value="bootcamp">Bootcamp</option>
+                                        <option value="competition">Competition</option>
+                                        <option value="conference">Conference</option>
+                                        <option value="course">Course</option>
+                                        <option value="exchange">Exchange Program</option>
+                                        <option value="fellowship">Fellowship</option>
+                                        <option value="graduate">Grad School</option>
+                                        <option value="hackathon">Hackathon</option>
+                                        <option value="high">High School</option>
+                                        <option value="internship">Internship</option>
+                                        <option value="masters">Masters</option>
+                                        <option value="undergraduate">Undergraduate</option>
+                                        <option value="primary">Primary School</option>
                                     </select>
                                     <p className="text-sm text-red-500 hidden mt-3" id="error">Please fill out this field.</p>
                                 </div>
@@ -196,18 +197,22 @@ export default function createProgram() {
                                 <div className="w-full flex flex-col mb-3 text-xs">
                                     <label className="font-semibold text-gray-600 py-2">  Select Year <abbr title="required">*</abbr></label>
                                     <select className="block w-full bg-white text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 md:w-full " required="required" name="year" id="year" onChange={e => updateFormInput({ ...formInput, year: e.target.value })}>
-                                        <option value="">2025</option>
-                                        <option value="">2024</option>
-                                        <option value="">2023</option>
-                                        <option value="">2022</option>
-                                        <option value="">2021</option>
-                                        <option value="">2020</option>
-                                        <option value="">2019</option>
-                                        <option value="">2018</option>
-                                        <option value="">2017</option>
-                                        <option value="">2016</option>
-                                        <option value="">2015</option>
-                                        <option value="">2014</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
                                     </select>
                                     <p className="text-sm text-red-500 hidden mt-3" id="error">Please fill out this field.</p>
                                 </div>

@@ -2,9 +2,10 @@ import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ProgramBanner from "./components/ProgramBanner";
-import { NFTAddress, NFTMarketplaceAddress } from "../config";
+import { TESTNET, NFTAddress, NFTMarketplaceAddress } from "../config";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 import NFT from "../abi/NFT.json";
+import Link from "next/link";
 
 const programs = () => {
 
@@ -16,6 +17,16 @@ const programs = () => {
         loadPrograms();
     }, []);
 
+    const openPage = ({ program }) => {
+        return (
+            <Link
+                href={{
+                    pathname: '/programProfile',
+                    query: program
+                }}></Link>
+        )
+    }
+
     /**
      * Load the current user Nft
      * @returns {Promise<void>}
@@ -23,7 +34,7 @@ const programs = () => {
     async function loadPrograms() {
 
         /* create a generic provider and query for listed programs items */
-        const provider = new ethers.providers.JsonRpcProvider("https://rpc-mumbai.maticvigil.com")
+        const provider = new ethers.providers.JsonRpcProvider(TESTNET)
         const marketplaceContract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, provider)
         const tokenContract = new ethers.Contract(NFTAddress, NFT, provider);
         const data = await marketplaceContract.fetchPrograms()
@@ -67,15 +78,15 @@ const programs = () => {
                             </div>
 
                             <div class="mt-1 p-2">
-                                <h2 className="text-slate-700">{program.title}</h2>
-                                <p className="mt-1 text-sm text-slate-400">{program.summary}</p>
+                                <h2 className="text-slate-700 line-clamp-1">{program.title}</h2>
+                                <p className="mt-1 text-sm text-slate-400 line-clamp-2">{program.summary}</p>
 
                                 <div className="mt-3 flex items-end justify-between">
                                     <p>
                                         <span className="text-sm text-orange-300">Year: {program.year}</span>
                                     </p>
                                 </div>
-                                <button className="mt-4 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Program Profile</button>
+                                <button onClick={() => router.push(`/${id}`)} className="mt-4 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Program Profile</button>
                             </div>
                         </div>
                     ))}

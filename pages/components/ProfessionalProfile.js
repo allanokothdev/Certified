@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Web3Modal from "web3modal";
-import { NFTAddress, nftMarketplaceAddress } from "../../config";
+import { TESTNET, NFTAddress, nftMarketplaceAddress } from "../../config";
 
 import NFT from "../../abi/NFT.json";
 import NFTMarketplace from "../../abi/NFTMarketplace.json";
@@ -18,9 +18,9 @@ const ProfessionalProfile = ({ professional }) => {
     async function loadCertificates() {
 
         /* create a generic provider and query for this professional's listed certificates  */
-        const provider = new ethers.providers.JsonRpcProvider()
+        const provider = new ethers.providers.JsonRpcProvider(TESTNET)
         const marketplaceContract = new ethers.Contract(nftMarketplaceAddress, NFTMarketplace, provider)
-        const data = await marketplaceContract.fetchProfessionalCertificates(professional?.userId);
+        const data = await marketplaceContract.fetchProfessionalCertificates(professional?.uid);
         const tokenContract = new ethers.Contract(NFTAddress, NFT, provider);
 
         const items = await Promise.all(data.map(async i => {
@@ -80,13 +80,13 @@ const ProfessionalProfile = ({ professional }) => {
             </div>
 
 
-            <div className="max-w-2xl mx-auto py-16 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
+            <div className="bg-gray-200 max-w-2xl mx-auto py-16 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <div className="mt-1 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
                     {certificates.map((certificate) => (
                         <div class="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
                             <div class="relative flex items-end overflow-hidden rounded-xl">
-                                <img src={certificate.image} alt="wallpaper" />
+                                <img src={certificate.image} className="w-full aspect-[1.29/1] object-contain" alt="wallpaper" />
                             </div>
 
                             <div class="mt-1 p-2">

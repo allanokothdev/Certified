@@ -112,7 +112,7 @@ export default function CreateCertificate() {
         await transaction.wait();
         console.log("completed")
         //navigate back to home page
-        router.push('/');
+        router.push('/programProfile');
     }
 
     return (

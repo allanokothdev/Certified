@@ -42,7 +42,7 @@ export default function createProfessional() {
                 }
             );
             //creating the url to fetch the uploaded file
-            const url = `https://infura-ipfs.io/ipfs/${added.path}`;
+            const url = `https://certified.infura-ipfs.io/ipfs/${added.path}`;
 
             setFileUrl(url);
         } catch (error) {
@@ -59,6 +59,14 @@ export default function createProfessional() {
         //getting name, description from the formInput dictionary
         const { name, title, summary, location, twitterLink, githubLink, linkedinLink } = formInput;
 
+        console.log(name);
+        console.log(title);
+        console.log(summary);
+        console.log(location);
+        console.log(twitterLink);
+        console.log(githubLink);
+        console.log(linkedinLink);
+
         console.log("Step Two")
         //If any of them is not present then it will not create the Professional Item
         if (!name || !title || !summary ||!location || !fileUrl || !twitterLink || !githubLink || !linkedinLink) return;
@@ -74,7 +82,7 @@ export default function createProfessional() {
             //uploading the profile pic to ipfs
             const added = await client.add(data);
             //creating url to fetch the uploaded profile pic
-            const url = `https://infura-ipfs.io/ipfs/${added.path}`;
+            const url = `https://certified.infura-ipfs.io/ipfs/${added.path}`;
             console.log(url)
             console.log(added.path)
             //listing the professional account
@@ -123,7 +131,7 @@ export default function createProfessional() {
         await transaction.wait();
         console.log("completed")
         //navigate back to home page
-        router.push('/');
+        router.push('/professionals');
     }
 
     return (
@@ -238,7 +246,7 @@ export default function createProfessional() {
                                         <input
                                             type="text"
                                             className="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow"
-                                            placeholder="https://"
+                                            placeholder="https://twitter.com/certified"
                                             name="twitterLink"
                                             id="twitterLink"
                                             onChange={e => updateFormInput({ ...formInput, twitterLink: e.target.value })}
@@ -272,7 +280,7 @@ export default function createProfessional() {
                                         <input
                                             type="text"
                                             className="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow"
-                                            placeholder="https://"
+                                            placeholder="https://linkedin/in/certified"
                                             name="linkedinLink"
                                             id="linkedinLink"
                                             onChange={e => updateFormInput({ ...formInput, linkedinLink: e.target.value })}
@@ -306,7 +314,7 @@ export default function createProfessional() {
                                         <input
                                             type="text"
                                             className="flex-shrink flex-grow flex-auto leading-normal w-px flex-1 border border-l-0 h-10 border-grey-light rounded-lg rounded-l-none px-3 relative focus:border-blue focus:shadow"
-                                            placeholder="https://"
+                                            placeholder="https://github.com/certified"
                                             name="githubLink"
                                             id="githubLink"
                                             onChange={e => updateFormInput({ ...formInput, githubLink: e.target.value })}
@@ -333,7 +341,7 @@ export default function createProfessional() {
 
                                 <div className="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
                                     
-                                    <button className="mb-2 md:mb-0 bg-indigo-600 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500">
+                                    <button onClick={publishOnIPFS} className="mb-2 md:mb-0 bg-indigo-600 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-green-500">
                                         Publish
                                     </button>
                                 </div>
