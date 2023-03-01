@@ -54,13 +54,6 @@ const professionals = () => {
         setLoadingState('loaded');
     }
 
-    const handleClick = ({ professional }) => {
-        router.push({
-            pathname: '/professionalProfile',
-            query: professional,
-        });
-    };
-
     // if (loadingState === 'loaded' && !professionals.length) return (<h1 className="py-10 px-20 text-3xl"> No Professionals have registered</h1>)
 
     return (
@@ -70,7 +63,13 @@ const professionals = () => {
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
                     {professionalList.map((professional) => (
-                        <div onClick={handleClick(professional)} key={professional.id} className="w-full border bg-white border-gray-200 rounded-lg shadow-sm">
+                        <div onClick={() =>
+                            router.push({
+                                pathname: '/professionalProfile',
+                                query: professional,
+                            })} 
+                        
+                            key={professional.id} className="w-full border bg-white border-gray-200 rounded-lg shadow-sm">
                             <div className="flex flex-col items-center justify-center p-10">
                                 <img alt=" " className="w-32 h-32 mb-6 rounded-full object-cover" src={professional.pic} />
                                 <h2 className="text-lg font-medium line-clamp-1">{professional.name}</h2>

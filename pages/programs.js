@@ -18,13 +18,6 @@ const programs = () => {
         loadPrograms();
     }, []);
 
-    const handleClick = ({ program }) => {
-        router.push({
-            pathname: '/programProfile',
-            query: program,
-        });
-    };
-
     /**
      * Load the current user Nft
      * @returns {Promise<void>}
@@ -48,7 +41,8 @@ const programs = () => {
             let item = {
                 tokenId: i.tokenId.toNumber(),
                 address: i.uid,
-                pic: meta.data.image,
+                image: meta.data.image,
+                category: meta.data.category,
                 title: meta.data.title,
                 summary: meta.data.summary,
                 year: meta.data.year
@@ -70,21 +64,27 @@ const programs = () => {
                 <div className="mt-1 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
                     {programList.map((program) => (
-                        <div className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
+                        <div key={program?.id} className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
                             <div className="relative flex items-end overflow-hidden rounded-xl">
-                                <img src={program.pic} className="aspect-square w-full object-cover" alt=" " />
+                                <img src={program?.image} className="aspect-square w-full object-cover" alt=" " />
                             </div>
 
-                            <div class="mt-1 p-2">
-                                <h2 className="text-slate-700 line-clamp-1">{program.title}</h2>
-                                <p className="mt-1 text-sm text-slate-400 line-clamp-2">{program.summary}</p>
+                            <div className="mt-1 p-2">
+                                <h2 className="text-slate-700 line-clamp-1">{program?.title}</h2>
+                                <p className="mt-1 text-sm text-slate-400 line-clamp-2">{program?.summary}</p>
 
                                 <div className="mt-3 flex items-end justify-between">
                                     <p>
-                                        <span className="text-sm text-orange-300">Year: {program.year}</span>
+                                        <span className="text-sm text-orange-300">Year: {program?.year}</span>
                                     </p>
                                 </div>
-                                <button onClick={handleClick} className="mt-4 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Program Profile</button>
+                                <button   
+                                    onClick={() => 
+                                        router.push({
+                                            pathname: '/programProfile',
+                                            query: { program },
+                                        })} 
+                                    className="mt-4 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Program Profile</button>
                             </div>
                         </div>
                     ))}

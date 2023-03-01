@@ -86,18 +86,18 @@ const ProfessionalProfile = () => {
                 <div className="mt-1 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
                     {certificates.map((certificate) => (
-                        <div class="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
-                            <div class="relative flex items-end overflow-hidden rounded-xl">
+                        <div className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
+                            <div className="relative flex items-end overflow-hidden rounded-xl">
                                 <img src={certificate.image} className="w-full aspect-[1.29/1] object-contain" alt="wallpaper" />
                             </div>
 
                             <div class="mt-1 p-2">
-                                <h2 class="text-slate-700">{certificate.title}</h2>
-                                <p class="mt-1 text-sm text-slate-400">{certificate.description}</p>
+                                <h2 className="text-slate-700">{certificate.title}</h2>
+                                <p className="mt-1 text-sm text-slate-400">{certificate.summary}</p>
 
-                                <div class="mt-3 flex items-end justify-between">
+                                <div className="mt-3 flex items-end justify-between">
                                     <p>
-                                        <span class="text-sm text-orange-300">{certificate.year}</span>
+                                        <span className="text-sm text-orange-300">{certificate.year}</span>
                                     </p>
                                 </div>
                                 <button className="mt-4 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Certificates</button>

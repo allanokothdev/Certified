@@ -8,15 +8,14 @@ import { useRouter } from "next/router";
 
 const ProgramProfile = () => {
 
-    const [certificates, setCertificates] = useState([])
-    const [loadingState, setLoadingState] = useState('not-loaded')
     const router = useRouter();
-    const { program } = router.query;
-
+    const [certificates, setCertificates] = useState([])
+    const [loadingState, setLoadingState] = useState('not-loaded');
 
     useEffect(() => {
-        loadCertificates()
-    }, [])
+        const { program } = router.query;
+        console.log(program);
+    }, []);
 
     async function loadCertificates() {
 
@@ -33,25 +32,17 @@ const ProgramProfile = () => {
             let item = {
                 title: meta.data.title,
                 image: meta.data.image,
-                description: meta.data.summary,
-                program: meta.data.program,
+                summary: meta.data.summary,
+                pid: meta.data.pid,
                 year: meta.data.year,
                 tokenId: i.tokenId.toNumber(),
-                student: i.uid,
-                programId: i.pid
+                uid: i.uid
             };
             return item;
         }))
         setCertificates(items)
         setLoadingState('loaded')
     }
-
-    const handleClick = ({ program }) => {
-        router.push({
-            pathname: '/createCertificate',
-            query: program,
-        });
-    };
 
     return (
         <div className="bg-white mx-20">
@@ -60,7 +51,7 @@ const ProgramProfile = () => {
                     <div className="flex-none sm:flex">
                         <div className=" relative h-64 w-64 sm:mb-0 mb-3">
                             <img
-                                src={program?.image}
+                                src={program?.pic}
                                 alt="Program Image"
                                 className="w-64 h-64 object-cover rounded-2xl"
                             />
@@ -85,7 +76,12 @@ const ProgramProfile = () => {
                             </div>
                             
                             <div className="flex pt-4  text-sm text-gray-500">
-                                <button onClick={handleClick} className="flex-no-shrink text-sm font-medium bg-indigo-600 hover:bg-indigo-500 px-5 py-2 shadow-sm hover:shadow-lg tracking-wider text-white rounded-full transition ease-in duration-300">
+                                <button onClick={() =>
+                                    router.push({
+                                        pathname: '/createCertificate',
+                                        query: { program },
+                                    })}
+                                className="flex-no-shrink text-sm font-medium bg-indigo-600 hover:bg-indigo-500 px-5 py-2 shadow-sm hover:shadow-lg tracking-wider text-white rounded-full transition ease-in duration-300">
                                     Upload New Certificate
                                 </button>
                             </div>
@@ -98,18 +94,18 @@ const ProgramProfile = () => {
                 <div className="mt-1 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
                     {certificates.map((certificate) => (
-                        <div class="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
-                            <div class="relative flex items-end overflow-hidden rounded-xl">
+                        <div className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
+                            <div className="relative flex items-end overflow-hidden rounded-xl">
                                 <img src={certificate.image} className="w-full aspect-[1.29/1] object-contain" alt=" " />
                             </div>
 
-                            <div class="mt-1 p-2">
-                                <h2 class="text-slate-700">{certificate.title}</h2>
-                                <p class="mt-1 text-sm text-slate-400">{certificate.program}</p>
+                            <div className="mt-1 p-2">
+                                <h2 className="text-slate-700">{certificate.title}</h2>
+                                <p className="mt-1 text-sm text-slate-400">{certificate.program}</p>
 
-                                <div class="mt-3 flex items-end justify-between">
+                                <div className="mt-3 flex items-end justify-between">
                                     <p>
-                                        <span class="text-sm text-orange-300">{certificate.year}</span>
+                                        <span className="text-sm text-orange-300">{certificate.year}</span>
                                     </p>
                                 </div>
                                 <button className="mt-4 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Certificates</button>
