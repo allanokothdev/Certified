@@ -6,12 +6,99 @@ import NFT from "../abi/NFT.json";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 import { useRouter } from "next/router";
 
+const products = [
+    {
+        id: 1,
+        name: 'Allan Okoth',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        price: '2023',
+        brand: 'Polygon Fellowship',
+    },
+    {
+        id: 2,
+        name: 'Allan Okoth',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        price: '2023',
+        brand: 'Polygon Fellowship',
+    },
+    {
+        id: 3,
+        name: 'Allan Okoth',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        price: '2023',
+        brand: 'Polygon Fellowship',
+    },
+    {
+        id: 4,
+        name: 'Allan Okoth',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        price: '2023',
+        brand: 'Polygon Fellowship',
+    },
+    {
+        id: 5,
+        name: 'Allan Okoth',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        price: '2023',
+        brand: 'Polygon Fellowship',
+    },
+    {
+        id: 6,
+        name: 'Allan Okoth',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        price: '2023',
+        brand: 'Polygon Fellowship',
+    },
+    {
+        id: 7,
+        name: 'Allan Okoth',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        price: '2023',
+        brand: 'Polygon Fellowship',
+    },
+    {
+        id: 8,
+        name: 'Allan Okoth',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        price: '2023',
+        brand: 'Polygon Fellowship',
+    },
+    {
+        id: 9,
+        name: 'Allan Okoth',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        price: '2023',
+        brand: 'Polygon Fellowship',
+    },
+    {
+        id: 10,
+        name: 'Allan Okoth',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        price: '2023',
+        brand: 'Polygon Fellowship',
+    },
+    {
+        id: 11,
+        name: 'Allan Okoth',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        price: '2023',
+        brand: 'Polygon Fellowship',
+    },
+    {
+        id: 12,
+        name: 'Allan Okoth',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        price: '2023',
+        brand: 'Polygon Fellowship',
+    },
+]
+
 const ProgramProfile = () => {
 
     const router = useRouter();
     const [certificates, setCertificates] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded');
-    const program  = router.query;
+    const program = router.query;
     console.log(program);
 
     useEffect(() => {
@@ -46,84 +133,83 @@ const ProgramProfile = () => {
     }
 
     return (
-        <div className="bg-gray-200 relative max-w-[1400px] mx-auto">
+        <section className="bg-gray-200">
+            <div className="container px-2 py-8 mx-auto">
+                <div className="lg:flex lg:-mx-2">
 
-            <div className="">
+                    <div className="space-y-3 lg:w-1/5 lg:px-2 lg:space-y-4">
 
-                <div className="bg-white border border-white shadow-lg p-4 rounded-2xl mt-2">
-                    
-                    <div className="bg-white border border-white flex-none sm:flex">
+                        <div className="bg-white block border border-white flex-none sm:flex rounded-2xl p-2">
 
-                        <div className=" relative h-64 w-64 sm:mb-0 mb-3">
-                            <img
-                                src={program?.image}
-                                alt=" "
-                                className="w-64 h-64 object-cover rounded-2xl"
-                            />
+                            <div className="relative">
+                                <img
+                                    src={program?.image}
+                                    alt=" "
+                                    className="w-42 h-42 object-cover rounded-2xl"
+                                />
 
-                            <div className="flex-auto sm:ml-5 justify-evenly">
-                                <div className="flex items-center justify-between sm:mt-2">
-                                    <div className="flex items-center">
-                                        <div className="flex flex-col pt-3">
-                                            <div className="flex-none text-lg text-gray-800 font-bold leading-none">
-                                                {program?.title}
+                                <div className="flex-auto sm:ml-5 justify-evenly">
+                                    <div className="flex items-center justify-between sm:mt-2">
+                                        <div className="flex items-center">
+                                            <div className="flex flex-col pt-3">
+                                                <div className="flex-none text-lg text-gray-800 font-bold leading-none">
+                                                    {program?.title}
+                                                </div>
+                                                <div className="flex-auto text-gray-500 my-1 pt-2">
+                                                    <span className="mr-3">{program?.category}</span>
+                                                    <span className="mr-3 border-r border-gray-200  max-h-0" />
+                                                    <span>{program?.year}</span>
+                                                </div>
+                                                <p className="mt-1 w-96 text-sm text-slate-400 pt-2">{program?.summary}</p>
                                             </div>
-                                            <div className="flex-auto text-gray-500 my-1 pt-2">
-                                                <span className="mr-3">{program?.category}</span>
-                                                <span className="mr-3 border-r border-gray-200  max-h-0" />
-                                                <span>{program?.year}</span>
-                                            </div>
-                                            <p className="mt-1 w-96 text-sm text-slate-400 pt-2">{program?.summary}</p>
                                         </div>
+                                    </div>
+
+                                    <div className="flex pt-4  text-sm text-gray-500">
+                                        <button onClick={() =>
+                                            router.push({
+                                                pathname: '/createCertificate',
+                                                query: program,
+                                            })}
+                                            className="flex-no-shrink text-sm font-medium bg-indigo-600 hover:bg-indigo-500 px-5 py-2 shadow-sm hover:shadow-lg tracking-wider text-white rounded-full transition ease-in duration-300">
+                                            Upload New Certificate
+                                        </button>
                                     </div>
                                 </div>
 
-                                <div className="flex pt-4  text-sm text-gray-500">
-                                    <button onClick={() =>
-                                        router.push({
-                                            pathname: '/createCertificate',
-                                            query: program,
-                                        })}
-                                        className="flex-no-shrink text-sm font-medium bg-indigo-600 hover:bg-indigo-500 px-5 py-2 shadow-sm hover:shadow-lg tracking-wider text-white rounded-full transition ease-in duration-300">
-                                        Upload New Certificate
-                                    </button>
-                                </div>
                             </div>
 
+
                         </div>
-                        
-                        
+
+
+                    </div>
+                    <div className="mt-6 lg:mt-0 lg:px-2 lg:w-4/5 ">
+
+                        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+                            {products.map((product, id) => (
+                                <div key={id} className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
+                                    <div className="relative flex items-end overflow-hidden rounded-xl">
+                                        <img src={product.imageSrc} className="w-full aspect-[1.29/1] object-cover" alt=" " />
+                                    </div>
+
+                                    <div className="mt-1 p-2">
+                                        <h2 className="text-slate-700">{product.name}</h2>
+                                        <p className="mt-1 text-sm text-slate-400">{product.brand}</p>
+
+                                        <div className="mt-1 flex items-end justify-between">
+                                            <p>
+                                                <span className="text-sm text-orange-300">{product.price}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div className=" max-w-2xl mx-auto py-16 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                <div className="mt-1 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-
-                    {certificates.map((certificate, i) => (
-                        <div key={i} className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
-                            <div className="relative flex items-end overflow-hidden rounded-xl">
-                                <img src={certificate.image} className="w-full aspect-[1.29/1] object-contain" alt=" " />
-                            </div>
-
-                            <div className="mt-1 p-2">
-                                <h2 className="text-slate-700">{certificate.title}</h2>
-                                <p className="mt-1 text-sm text-slate-400">{certificate.program}</p>
-
-                                <div className="mt-3 flex items-end justify-between">
-                                    <p>
-                                        <span className="text-sm text-orange-300">{certificate.year}</span>
-                                    </p>
-                                </div>
-                                <button className="mt-4 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Certificates</button>
-                            </div>
-                        </div>
-                    ))}
-
-                </div>
-            </div>
-
-        </div>
+        </section>
     )
 };
 
