@@ -11,10 +11,11 @@ const ProgramProfile = () => {
     const router = useRouter();
     const [certificates, setCertificates] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded');
+    const { program } = router.query;
+    console.log(program);
 
     useEffect(() => {
-        const { program } = router.query;
-        console.log(program);
+        //loadCertificates();
     }, []);
 
     async function loadCertificates() {
@@ -93,8 +94,8 @@ const ProgramProfile = () => {
             <div className="bg-gray-200 max-w-2xl mx-auto py-16 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <div className="mt-1 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
-                    {certificates.map((certificate) => (
-                        <div className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
+                    {certificates.map((certificate, i) => (
+                        <div key={i} className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
                             <div className="relative flex items-end overflow-hidden rounded-xl">
                                 <img src={certificate.image} className="w-full aspect-[1.29/1] object-contain" alt=" " />
                             </div>

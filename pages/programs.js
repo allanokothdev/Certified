@@ -14,7 +14,7 @@ const programs = () => {
     const [loadingState, setLoadingState] = useState('not-loaded');
 
     useEffect(() => {
-        //load professionals when web page loads
+        //load programs when web page loads
         loadPrograms();
     }, []);
 
@@ -35,8 +35,6 @@ const programs = () => {
             const tokenURI = await tokenContract.tokenURI(i.tokenId);
             //fetching the ipfs url, which will return a meta json
             const meta = await axios.get(tokenURI);
-
-            console.log(meta.toString());
 
             let item = {
                 tokenId: i.tokenId.toNumber(),
@@ -63,8 +61,8 @@ const programs = () => {
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <div className="mt-1 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
-                    {programList.map((program) => (
-                        <div key={program?.id} className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
+                    {programList.map((program, i) => (
+                        <div key={i} className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
                             <div className="relative flex items-end overflow-hidden rounded-xl">
                                 <img src={program?.image} className="aspect-square w-full object-cover" alt=" " />
                             </div>

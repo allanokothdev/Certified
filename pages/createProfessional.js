@@ -131,7 +131,7 @@ export default function createProfessional() {
         await transaction.wait();
         console.log("completed")
         //navigate back to home page
-        router.push('/professionals');
+        router.back();
     }
 
     return (
