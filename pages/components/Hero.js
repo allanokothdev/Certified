@@ -5,7 +5,7 @@ const Hero = () => {
 
     const OpenPage = () => {
         return (
-            <Link className="mb-8 py-2 px-10 text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" href="/createProgram">Get Started today!</Link>
+            <Lin className="mb-8 py-2 px-10 text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" href="/createProgram">Get Started today!</Link>
         )
     }
 
