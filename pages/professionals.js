@@ -1,14 +1,16 @@
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { TESTNET, NFTAddress, NFTMarketplaceAddress } from "../config";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 import NFT from "../abi/NFT.json";
 import ProfessionalBanner from "./components/ProfessionalBanner";
+import { useRouter } from "next/router";
 
 const professionals = () => {
 
-    const [professionals, setProfessionals] = useState([]);
+    const router = useRouter();
+    const [professionalList, setProfessionalList] = useState([]);
     const [loadingState, setLoadingState] = useState('not-loaded');
 
     useEffect(() => {
@@ -48,9 +50,16 @@ const professionals = () => {
             return item; 
         }));
 
-        setProfessionals(items);
+        setProfessionalList(items);
         setLoadingState('loaded');
     }
+
+    const handleClick = ({ professional }) => {
+        router.push({
+            pathname: '/professionalProfile',
+            query: professional,
+        });
+    };
 
     // if (loadingState === 'loaded' && !professionals.length) return (<h1 className="py-10 px-20 text-3xl"> No Professionals have registered</h1>)
 
@@ -60,8 +69,8 @@ const professionals = () => {
             <div className="max-w-2xl mx-auto py-16 px-4 sm:py-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
-                    {professionals.map((professional) => (
-                        <div key={professional.id} className="w-full border bg-white border-gray-200 rounded-lg shadow-sm">
+                    {professionalList.map((professional) => (
+                        <div onClick={handleClick(professional)} key={professional.id} className="w-full border bg-white border-gray-200 rounded-lg shadow-sm">
                             <div className="flex flex-col items-center justify-center p-10">
                                 <img alt=" " className="w-32 h-32 mb-6 rounded-full object-cover" src={professional.pic} />
                                 <h2 className="text-lg font-medium line-clamp-1">{professional.name}</h2>

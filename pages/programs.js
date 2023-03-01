@@ -5,10 +5,11 @@ import ProgramBanner from "./components/ProgramBanner";
 import { TESTNET, NFTAddress, NFTMarketplaceAddress } from "../config";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 import NFT from "../abi/NFT.json";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 const programs = () => {
 
+    const router = useRouter();
     const [programList, setProgramList] = useState([]);
     const [loadingState, setLoadingState] = useState('not-loaded');
 
@@ -17,15 +18,12 @@ const programs = () => {
         loadPrograms();
     }, []);
 
-    const openPage = ({ program }) => {
-        return (
-            <Link
-                href={{
-                    pathname: '/programProfile',
-                    query: program
-                }}></Link>
-        )
-    }
+    const handleClick = ({ program }) => {
+        router.push({
+            pathname: '/programProfile',
+            query: program,
+        });
+    };
 
     /**
      * Load the current user Nft
@@ -86,7 +84,7 @@ const programs = () => {
                                         <span className="text-sm text-orange-300">Year: {program.year}</span>
                                     </p>
                                 </div>
-                                <button onClick={() => router.push(`/${id}`)} className="mt-4 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Program Profile</button>
+                                <button onClick={handleClick} className="mt-4 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Program Profile</button>
                             </div>
                         </div>
                     ))}

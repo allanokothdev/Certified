@@ -1,17 +1,19 @@
 import { ethers } from "ethers";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Web3Modal from "web3modal";
-import { TESTNET, NFTAddress, nftMarketplaceAddress } from "../../config";
+import { TESTNET, NFTAddress, nftMarketplaceAddress } from "../config";
 
-import NFT from "../../abi/NFT.json";
-import NFTMarketplace from "../../abi/NFTMarketplace.json";
+import NFT from "../abi/NFT.json";
+import NFTMarketplace from "../abi/NFTMarketplace.json";
 
-const ProfessionalProfile = ({ professional }) => {
+const ProfessionalProfile = () => {
 
     const [certificates, setCertificates] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded')
-    const router = useRouter()
+    const router = useRouter();
+    const { professional } = router.query;
+
     useEffect(() => {
         loadCertificates()
     }, [])

@@ -1,15 +1,18 @@
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { TESTNET, NFTAddress, NFTMarketplaceAddress } from "../../config";
-import NFT from "../../abi/NFT.json";
-import NFTMarketplace from "../../abi/NFTMarketplace.json";
+import { TESTNET, NFTAddress, NFTMarketplaceAddress } from "../config";
+import NFT from "../abi/NFT.json";
+import NFTMarketplace from "../abi/NFTMarketplace.json";
+import { useRouter } from "next/router";
 
-const ProgramProfile = ({ program }) => {
+const ProgramProfile = () => {
 
     const [certificates, setCertificates] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded')
-    const router = useRouter()
+    const router = useRouter();
+    const { program } = router.query;
+
 
     useEffect(() => {
         loadCertificates()
@@ -43,8 +46,13 @@ const ProgramProfile = ({ program }) => {
         setLoadingState('loaded')
     }
 
-    if (loadingState === 'loaded' && !certificates.length) return (<h1 className="py-10 px-20 text-3xl">No Certificates Uploaded</h1>)
-    
+    const handleClick = ({ program }) => {
+        router.push({
+            pathname: '/createCertificate',
+            query: program,
+        });
+    };
+
     return (
         <div className="bg-white mx-20">
             <div className="flex flex-col">
@@ -77,7 +85,7 @@ const ProgramProfile = ({ program }) => {
                             </div>
                             
                             <div className="flex pt-4  text-sm text-gray-500">
-                                <button className="flex-no-shrink text-sm font-medium bg-indigo-600 hover:bg-indigo-500 px-5 py-2 shadow-sm hover:shadow-lg tracking-wider text-white rounded-full transition ease-in duration-300">
+                                <button onClick={handleClick} className="flex-no-shrink text-sm font-medium bg-indigo-600 hover:bg-indigo-500 px-5 py-2 shadow-sm hover:shadow-lg tracking-wider text-white rounded-full transition ease-in duration-300">
                                     Upload New Certificate
                                 </button>
                             </div>
