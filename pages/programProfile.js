@@ -53,7 +53,7 @@ const ProgramProfile = () => {
                         <div className=" relative h-64 w-64 sm:mb-0 mb-3">
                             <img
                                 src={program?.pic}
-                                alt="Program Image"
+                                alt=" "
                                 className="w-64 h-64 object-cover rounded-2xl"
                             />
 
