@@ -39,6 +39,7 @@ const programs = () => {
             let item = {
                 tokenId: i.tokenId.toNumber(),
                 address: i.uid,
+                pid: i.pid,
                 image: meta.data.image,
                 category: meta.data.category,
                 title: meta.data.title,
@@ -80,7 +81,7 @@ const programs = () => {
                                     onClick={() => 
                                         router.push({
                                             pathname: '/programProfile',
-                                            query: { program },
+                                            query: program ,
                                         })} 
                                     className="mt-4 py-2 px-10 w-full text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" type="button">Program Profile</button>
                             </div>

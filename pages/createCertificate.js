@@ -23,10 +23,12 @@ const client = ipfsHttpClient({
 
 export default function CreateCertificate() {
 
+    const router = useRouter();
+    const program = router.query;
+    console.log(program);
+
     const [fileUrl, setFileUrl] = useState(null);
     const [formInput, updateFormInput] = useState({ title: '', summary: program?.title, student: '', year: program?.year, pid: program?.pid })
-    const router = useRouter();
-    const { program } = router.query;  
 
     /**
      * On nft file change
