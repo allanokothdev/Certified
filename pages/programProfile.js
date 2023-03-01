@@ -6,92 +6,6 @@ import NFT from "../abi/NFT.json";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 import { useRouter } from "next/router";
 
-const products = [
-    {
-        id: 1,
-        name: 'Allan Okoth',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        price: '2023',
-        brand: 'Polygon Fellowship',
-    },
-    {
-        id: 2,
-        name: 'Allan Okoth',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        price: '2023',
-        brand: 'Polygon Fellowship',
-    },
-    {
-        id: 3,
-        name: 'Allan Okoth',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        price: '2023',
-        brand: 'Polygon Fellowship',
-    },
-    {
-        id: 4,
-        name: 'Allan Okoth',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        price: '2023',
-        brand: 'Polygon Fellowship',
-    },
-    {
-        id: 5,
-        name: 'Allan Okoth',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        price: '2023',
-        brand: 'Polygon Fellowship',
-    },
-    {
-        id: 6,
-        name: 'Allan Okoth',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        price: '2023',
-        brand: 'Polygon Fellowship',
-    },
-    {
-        id: 7,
-        name: 'Allan Okoth',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        price: '2023',
-        brand: 'Polygon Fellowship',
-    },
-    {
-        id: 8,
-        name: 'Allan Okoth',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        price: '2023',
-        brand: 'Polygon Fellowship',
-    },
-    {
-        id: 9,
-        name: 'Allan Okoth',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        price: '2023',
-        brand: 'Polygon Fellowship',
-    },
-    {
-        id: 10,
-        name: 'Allan Okoth',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        price: '2023',
-        brand: 'Polygon Fellowship',
-    },
-    {
-        id: 11,
-        name: 'Allan Okoth',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        price: '2023',
-        brand: 'Polygon Fellowship',
-    },
-    {
-        id: 12,
-        name: 'Allan Okoth',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        price: '2023',
-        brand: 'Polygon Fellowship',
-    },
-]
 
 const ProgramProfile = () => {
 
@@ -102,7 +16,7 @@ const ProgramProfile = () => {
     console.log(program);
 
     useEffect(() => {
-        //loadCertificates();
+        loadCertificates();
     }, []);
 
     async function loadCertificates() {
@@ -111,7 +25,7 @@ const ProgramProfile = () => {
         const provider = new ethers.providers.JsonRpcProvider(TESTNET)
         const marketplaceContract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, provider)
         const tokenContract = new ethers.Contract(NFTAddress, NFT, provider);
-        const data = await marketplaceContract.fetchProgramCertificates(program?.programId)
+        const data = await marketplaceContract.fetchProgramCertificates(program?.pid)
 
         const items = await Promise.all(data.map(async i => {
             const tokenURI = await tokenContract.tokenURI(i.tokenId)
@@ -187,19 +101,19 @@ const ProgramProfile = () => {
                     <div className="mt-6 lg:mt-0 lg:px-2 lg:w-4/5 ">
 
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-3">
-                            {products.map((product, id) => (
-                                <div key={id} className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
+                            {certificates.map((certificate, i) => (
+                                <div key={i} className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
                                     <div className="relative flex items-end overflow-hidden rounded-xl">
-                                        <img src={product.imageSrc} className="w-full aspect-[1.29/1] object-cover" alt=" " />
+                                        <img src={certificate.image} className="w-full aspect-[1.29/1] object-cover" alt=" " />
                                     </div>
 
                                     <div className="mt-1 p-2">
-                                        <h2 className="text-slate-700">{product.name}</h2>
-                                        <p className="mt-1 text-sm text-slate-400">{product.brand}</p>
+                                        <h2 className="text-slate-700">{certificate.name}</h2>
+                                        <p className="mt-1 text-sm text-slate-400">{certificate.summary}</p>
 
                                         <div className="mt-1 flex items-end justify-between">
                                             <p>
-                                                <span className="text-sm text-orange-300">{product.price}</span>
+                                                <span className="text-sm text-orange-300">{certificate.year}</span>
                                             </p>
                                         </div>
                                     </div>
