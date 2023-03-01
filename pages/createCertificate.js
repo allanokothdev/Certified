@@ -28,7 +28,7 @@ export default function CreateCertificate() {
     console.log(program);
 
     const [fileUrl, setFileUrl] = useState(null);
-    const [formInput, updateFormInput] = useState({ title: '', summary: program?.title, student: '', year: program?.year, pid: program?.pid })
+    const [formInput, updateFormInput] = useState({ title: '', summary: program?.title, student: '', year: program?.year, pid: program?.pid, reference: '' })
 
     /**
      * On nft file change
@@ -58,11 +58,11 @@ export default function CreateCertificate() {
      * Create a new certificate.
      */
     async function publishOnIPFS() {
-        const { title, summary, year, pid, student } = formInput
-        if (!title || !student || !fileUrl) return
+        const { title, summary, year, pid, student, reference } = formInput
+        if (!title || !student || !reference || !fileUrl) return
         /* first, upload to IPFS */
         const data = JSON.stringify({
-            title, summary, pid, year, image: fileUrl
+            title, summary, pid, year, reference, image: fileUrl
         })
 
         try {
@@ -73,7 +73,7 @@ export default function CreateCertificate() {
             console.log(url)
             console.log(added.path)
             //listing the certificate or marking it as sale
-            publishCertificate(url, student, pid);
+            publishCertificate(url, student, pid, reference);
         } catch (error) {
             console.log("Error in Uploading File:", error);
         }
@@ -83,7 +83,7 @@ export default function CreateCertificate() {
      * Creating the NFT and Making it to sale. Calling the web 3.0 contracts here.
      * @param {string} url ipfs url where certificate is uploaded
      */
-    async function publishCertificate(url, student, pid) {
+    async function publishCertificate(url, student, pid, reference) {
         const web3Modal = new Web3Modal();
         const connection = await web3Modal.connect();
         const provider = new ethers.providers.Web3Provider(connection);
@@ -172,13 +172,30 @@ export default function CreateCertificate() {
                                     <label className="font-semibold text-gray-600 py-2"> Student Wallet Address <abbr title="required">*</abbr>
                                     </label>
                                     <input
-                                        placeholder="Enter Student Name"
+                                        placeholder="Enter Student Wallet Address"
                                         className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                                         required="required"
                                         type="text"
                                         name="student"
                                         id="student"
                                         onChange={e => updateFormInput({ ...formInput, student: e.target.value })}
+                                    />
+                                    <p className="text-red text-xs hidden">
+                                        Please fill out this field.
+                                    </p>
+                                </div>
+
+                                <div className="mb-3 space-y-2 w-full text-xs">
+                                    <label className="font-semibold text-gray-600 py-2"> Certificate Reference Number <abbr title="required">*</abbr>
+                                    </label>
+                                    <input
+                                        placeholder="Enter Certificate Reference Number"
+                                        className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+                                        required="required"
+                                        type="text"
+                                        name="student"
+                                        id="student"
+                                        onChange={e => updateFormInput({ ...formInput, reference: e.target.value })}
                                     />
                                     <p className="text-red text-xs hidden">
                                         Please fill out this field.

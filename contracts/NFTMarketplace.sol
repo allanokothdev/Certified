@@ -37,6 +37,7 @@ contract NFTMarketplace is ReentrancyGuard {
         address uid;
         uint256 pid;
         address publisher;
+        string refNo;
     }
 
     // Data Structure of a program
@@ -60,11 +61,12 @@ contract NFTMarketplace is ReentrancyGuard {
 
     event CertificateItemCreated(
         uint256 indexed cid,
-        address indexed nftContract,
+        address nftContract,
         uint256 indexed tokenId,
         address uid,
         uint256 pid,
-        address publisher
+        address publisher,
+        string indexed refNo
     );
 
     event ProgramItemCreated(
@@ -196,7 +198,7 @@ contract NFTMarketplace is ReentrancyGuard {
     /// @notice Function for Creating a certificate on the Platform
     /// @param nftContract: NFT contract address
     /// @param tokenId: Token Id of the contract.
-    function createCertificate(address nftContract, address student_address, uint256 _programId, uint256 tokenId)
+    function createCertificate(address nftContract, address student_address, uint256 _programId, uint256 tokenId, string memory refNo)
         public
         payable
         nonReentrant
@@ -214,7 +216,8 @@ contract NFTMarketplace is ReentrancyGuard {
             tokenId,
             student_address,
             _programId,
-            msg.sender
+            msg.sender,
+            refNo
         );
 
         // Transferring the NFT contract from the Publisher to the Student Address
@@ -227,7 +230,8 @@ contract NFTMarketplace is ReentrancyGuard {
             tokenId,
             student_address,
             _programId,
-            msg.sender
+            msg.sender,
+            refNo
         );
     }
 

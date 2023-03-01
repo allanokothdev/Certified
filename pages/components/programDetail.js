@@ -11,7 +11,7 @@ const ProgramProfile = () => {
     const router = useRouter();
     const [certificates, setCertificates] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded');
-    const program = router.query;
+    const program  = router.query;
     console.log(program);
 
     useEffect(() => {
@@ -51,7 +51,7 @@ const ProgramProfile = () => {
             <div className="">
 
                 <div className="bg-white border border-white shadow-lg p-4 rounded-2xl mt-2">
-
+                    
                     <div className="bg-white border border-white flex-none sm:flex">
 
                         <div className=" relative h-64 w-64 sm:mb-0 mb-3">
@@ -91,8 +91,8 @@ const ProgramProfile = () => {
                             </div>
 
                         </div>
-
-
+                        
+                        
                     </div>
                 </div>
             </div>
