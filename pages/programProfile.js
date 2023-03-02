@@ -6,17 +6,24 @@ import NFT from "../abi/NFT.json";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 import { useRouter } from "next/router";
 
+const TESTNET = process.env.MUMBAI_TESTNET;
+const NFTMarketplaceAddress = process.env.NFT_MARKETPLACE_ADDRESS;
+const NFTAddress = process.env.NFT_ADDRESS;
+
 
 const ProgramProfile = () => {
 
     const router = useRouter();
+    const [pid, setPid] = useState(0);
     const [certificates, setCertificates] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded');
     const program = router.query;
+    setPid(program.pid);
+    loadCertificates();
     console.log(program);
 
     useEffect(() => {
-        loadCertificates();
+        //loadCertificates();
     }, []);
 
     async function loadCertificates() {
@@ -25,7 +32,7 @@ const ProgramProfile = () => {
         const provider = new ethers.providers.JsonRpcProvider(TESTNET)
         const marketplaceContract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, provider)
         const tokenContract = new ethers.Contract(NFTAddress, NFT, provider);
-        const data = await marketplaceContract.fetchProgramCertificates(program?.pid)
+        const data = await marketplaceContract.fetchProgramCertificates(pid);
 
         const items = await Promise.all(data.map(async i => {
             const tokenURI = await tokenContract.tokenURI(i.tokenId)

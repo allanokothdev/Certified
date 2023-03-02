@@ -6,6 +6,10 @@ import NFT from "../abi/NFT.json";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 import { useRouter } from "next/router";
 
+const TESTNET = process.env.MUMBAI_TESTNET;
+const NFTMarketplaceAddress = process.env.NFT_MARKETPLACE_ADDRESS;
+const NFTAddress = process.env.NFT_ADDRESS;
+
 
 const professionalProfile = () => {
 
@@ -13,10 +17,11 @@ const professionalProfile = () => {
     const [certificates, setCertificates] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded');
     const professional = router.query;
+    loadCertificates();
     console.log(professional);
 
     useEffect(() => {
-        loadCertificates();
+        //loadCertificates();
     }, []);
 
     async function loadCertificates() {

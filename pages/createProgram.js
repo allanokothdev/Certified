@@ -9,6 +9,13 @@ import { useRouter } from 'next/router'
 import { NFTAddress, NFTMarketplaceAddress, projectId, projectSecret } from "../config";
 import NFT from "../abi/NFT.json";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
+
+const TESTNET = process.env.MUMBAI_TESTNET;
+const NFTMarketplaceAddress = process.env.NFT_MARKETPLACE_ADDRESS;
+const NFTAddress = process.env.NFT_ADDRESS;
+const projectId = process.env.PROJECT_ID;
+const projectSecret = process.env.PROJECT_SECRET;
+
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
 
 

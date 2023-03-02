@@ -7,6 +7,10 @@ import NFTMarketplace from "../abi/NFTMarketplace.json";
 import NFT from "../abi/NFT.json";
 import { useRouter } from "next/router";
 
+const TESTNET = process.env.MUMBAI_TESTNET;
+const NFTMarketplaceAddress = process.env.NFT_MARKETPLACE_ADDRESS;
+const NFTAddress = process.env.NFT_ADDRESS;
+
 const programs = () => {
 
     const router = useRouter();
@@ -39,13 +43,15 @@ const programs = () => {
             let item = {
                 tokenId: i.tokenId.toNumber(),
                 address: i.uid,
-                pid: i.pid,
+                pid: i.pid.toNumber(),
                 image: meta.data.image,
                 category: meta.data.category,
                 title: meta.data.title,
                 summary: meta.data.summary,
                 year: meta.data.year
             };
+
+            console.log(item);
             return item;
         }));
 
