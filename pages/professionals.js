@@ -7,10 +7,6 @@ import NFT from "../abi/NFT.json";
 import ProfessionalBanner from "./components/ProfessionalBanner";
 import { useRouter } from "next/router";
 
-const TESTNET = process.env.MUMBAI_TESTNET;
-const NFTMarketplaceAddress = process.env.NFT_MARKETPLACE_ADDRESS;
-const NFTAddress = process.env.NFT_ADDRESS;
-
 const professionals = () => {
 
     const router = useRouter();

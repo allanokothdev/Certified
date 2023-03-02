@@ -6,25 +6,13 @@ import NFT from "../abi/NFT.json";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 import { useRouter } from "next/router";
 
-const TESTNET = process.env.MUMBAI_TESTNET;
-const NFTMarketplaceAddress = process.env.NFT_MARKETPLACE_ADDRESS;
-const NFTAddress = process.env.NFT_ADDRESS;
-
-
 const ProgramProfile = () => {
 
     const router = useRouter();
-    const [pid, setPid] = useState(0);
     const [certificates, setCertificates] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded');
-    const program = router.query;
-    setPid(program.pid);
+    const { uid, pid, title, image, category, summary, year } = router.query;
     loadCertificates();
-    console.log(program);
-
-    useEffect(() => {
-        //loadCertificates();
-    }, []);
 
     async function loadCertificates() {
 
@@ -64,7 +52,7 @@ const ProgramProfile = () => {
 
                             <div className="relative">
                                 <img
-                                    src={program?.image}
+                                    src={image}
                                     alt=" "
                                     className="w-full aspect-square object-cover rounded-2xl"
                                 />
@@ -74,24 +62,20 @@ const ProgramProfile = () => {
                                         <div className="flex items-center">
                                             <div className="flex flex-col pt-2">
                                                 <div className="flex-none text-lg text-gray-800 font-bold leading-none">
-                                                    {program?.title}
+                                                    {title}
                                                 </div>
                                                 <div className="flex-auto text-gray-500 pt-2">
-                                                    <span className="mr-3">{program?.category}</span>
+                                                    <span className="mr-3">{category}</span>
                                                     <span className="mr-3 border-r border-gray-200  max-h-0" />
-                                                    <span>{program?.year}</span>
+                                                    <span>{year}</span>
                                                 </div>
-                                                <p className="w-96 text-sm text-slate-400 pt-2">{program?.summary}</p>
+                                                <p className="w-96 text-sm text-slate-400 pt-2">{summary}</p>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="flex pt-4  text-sm text-gray-500">
-                                        <button onClick={() =>
-                                            router.push({
-                                                pathname: '/createCertificate',
-                                                query: program,
-                                            })}
+                                        <button onClick={() => router.push(`/createCertificate?pid=${pid}&image=${image}&title=${title}&summary=${summary}&year=${year}&uid=${uid}&category=${category}`)}
                                             className="flex-no-shrink text-sm font-semibold bg-indigo-600 hover:bg-indigo-500 px-5 py-2 shadow-sm hover:shadow-lg tracking-wider text-white rounded-full transition ease-in duration-300">
                                             Upload Certificate
                                         </button>

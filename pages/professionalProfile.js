@@ -6,10 +6,6 @@ import NFT from "../abi/NFT.json";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 import { useRouter } from "next/router";
 
-const TESTNET = process.env.MUMBAI_TESTNET;
-const NFTMarketplaceAddress = process.env.NFT_MARKETPLACE_ADDRESS;
-const NFTAddress = process.env.NFT_ADDRESS;
-
 
 const professionalProfile = () => {
 

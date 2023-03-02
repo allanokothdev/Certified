@@ -9,13 +9,6 @@ import { Buffer } from 'buffer'
 import { NFTAddress, NFTMarketplaceAddress, projectId, projectSecret } from "../config";
 import NFT from "../abi/NFT.json";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
-
-const TESTNET = process.env.MUMBAI_TESTNET;
-const NFTMarketplaceAddress = process.env.NFT_MARKETPLACE_ADDRESS;
-const NFTAddress = process.env.NFT_ADDRESS;
-const projectId = process.env.PROJECT_ID;
-const projectSecret = process.env.PROJECT_SECRET;
-
 const auth = 'Basic ' + Buffer.from(projectId + ':' + projectSecret).toString('base64');
 
 const client = ipfsHttpClient({
@@ -31,11 +24,10 @@ const client = ipfsHttpClient({
 export default function CreateCertificate() {
 
     const router = useRouter();
-    const program = router.query;
-    console.log(program);
+    const { uid, pid, title, year } = router.query;
 
     const [fileUrl, setFileUrl] = useState(null);
-    const [formInput, updateFormInput] = useState({ title: '', summary: program?.title, student: '', year: program?.year, pid: program?.pid, reference: '' })
+    const [formInput, updateFormInput] = useState({ title: '', summary: title, student: '', year: year, pid: pid, reference: '' })
 
     /**
      * On nft file change
