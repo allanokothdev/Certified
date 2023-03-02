@@ -12,13 +12,8 @@ const professionalProfile = () => {
     const router = useRouter();
     const [certificates, setCertificates] = useState([])
     const [loadingState, setLoadingState] = useState('not-loaded');
-    const professional = router.query;
+    const { uid, name, title, image, location, summary } = router.query;
     loadCertificates();
-    console.log(professional);
-
-    useEffect(() => {
-        //loadCertificates();
-    }, []);
 
     async function loadCertificates() {
 
@@ -26,7 +21,7 @@ const professionalProfile = () => {
         const provider = new ethers.providers.JsonRpcProvider(TESTNET)
         const marketplaceContract = new ethers.Contract(NFTMarketplaceAddress, NFTMarketplace, provider)
         const tokenContract = new ethers.Contract(NFTAddress, NFT, provider);
-        const data = await marketplaceContract.fetchProfessionalCertificates(professional?.uid)
+        const data = await marketplaceContract.fetchProfessionalCertificates(uid)
 
         const items = await Promise.all(data.map(async i => {
             const tokenURI = await tokenContract.tokenURI(i.tokenId)
@@ -58,7 +53,7 @@ const professionalProfile = () => {
 
                             <div className="relative">
                                 <img
-                                    src={professional?.image}
+                                    src={image}
                                     alt=" "
                                     className="w-full aspect-square object-cover rounded-2xl"
                                 />
@@ -68,11 +63,11 @@ const professionalProfile = () => {
                                         <div className="flex items-center">
                                             <div className="flex flex-col pt-2">
                                                 <div className="flex-none text-lg text-gray-800 font-bold leading-none">
-                                                    {professional?.name}
+                                                    {name}
                                                 </div>
-                                                <span className="mr-3 pt-2">{professional?.title}</span>
-                                                <span className="mr-3 pt-2">{professional?.location}</span>
-                                                <p className="w-96 text-sm text-slate-400 pt-2">{professional?.summary}</p>
+                                                <span className="pt-2">{title}</span>
+                                                <span className="pt-2">{location}</span>
+                                                <p className="w-96 text-sm text-slate-400 pt-2">{summary}</p>
                                             </div>
                                         </div>
                                     </div>

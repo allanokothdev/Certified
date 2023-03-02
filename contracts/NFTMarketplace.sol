@@ -203,9 +203,9 @@ contract NFTMarketplace is ReentrancyGuard {
         payable
         nonReentrant
     {
+        assert(programList[_programId].uid == msg.sender);  
         require(msg.value == listingPrice, "Price must be equal to listing price");
-        assert(programList[_programId].uid == msg.sender);
-        payable(owner).transfer(listingPrice);
+        owner.transfer(msg.value);
 
         _certIds.increment();
         uint256 cid = _certIds.current();

@@ -9,7 +9,7 @@
 				"type": "uint256"
 			},
 			{
-				"indexed": true,
+				"indexed": false,
 				"internalType": "address",
 				"name": "nftContract",
 				"type": "address"
@@ -37,6 +37,12 @@
 				"internalType": "address",
 				"name": "publisher",
 				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "string",
+				"name": "refNo",
+				"type": "string"
 			}
 		],
 		"name": "CertificateItemCreated",
@@ -155,6 +161,11 @@
 				"internalType": "uint256",
 				"name": "tokenId",
 				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "refNo",
+				"type": "string"
 			}
 		],
 		"name": "createCertificate",
@@ -282,6 +293,11 @@
 						"internalType": "address",
 						"name": "publisher",
 						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "refNo",
+						"type": "string"
 					}
 				],
 				"internalType": "struct NFTMarketplace.Certificate[]",
@@ -378,6 +394,11 @@
 						"internalType": "address",
 						"name": "publisher",
 						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "refNo",
+						"type": "string"
 					}
 				],
 				"internalType": "struct NFTMarketplace.Certificate[]",

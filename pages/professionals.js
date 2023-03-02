@@ -37,15 +37,15 @@ const professionals = () => {
 
             let item = {
                 tokenId: i.tokenId.toNumber(),
-                id: i.pid,
-                address: i.uid,
-                pic: meta.data.image,
-                name: i.name,
-                title: i.title,
-                summary: i.summary,
-                twitterLink: i.twitterLink,
-                githubLink: i.githubLink,
-                linkedinLink: i.linkedinLink
+                uid: i.uid,
+                image: meta.data.image,
+                name: meta.data.name,
+                title: meta.data.title,
+                summary: meta.data.summary,
+                location: meta.data.location,
+                twitterLink: meta.data.twitterLink,
+                githubLink: meta.data.githubLink,
+                linkedinLink: meta.data.linkedinLink
             };
             return item; 
         }));
@@ -63,15 +63,11 @@ const professionals = () => {
                 <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
 
                     {professionalList.map((professional, i) => (
-                        <div onClick={() =>
-                            router.push({
-                                pathname: '/professionalProfile',
-                                query: { professional },
-                            })} 
+                        <div onClick={() => router.push(`/professionalProfile?uid=${professional.uid}&image=${professional.image}&name=${professional.name}&title=${professional.title}&location=${professional.location}&summary=${professional.summary}`)}
                         
                             key={i} className="w-full border bg-white border-gray-200 rounded-lg shadow-sm">
                             <div className="flex flex-col items-center justify-center p-10">
-                                <img alt=" " className="w-32 h-32 mb-6 rounded-full object-cover" src={professional?.pic} />
+                                <img alt=" " className="w-32 h-32 mb-6 rounded-full object-cover" src={professional?.image} />
                                 <h2 className="text-lg font-medium line-clamp-1">{professional?.name}</h2>
                                 <p className="font-medium text-blue-500 line-clamp-1">{professional?.title}</p>
                             </div>
@@ -91,7 +87,7 @@ const professionals = () => {
                                     </svg>
                                 </a>
                                 <a href={professional?.linkedinLink} className="flex-1 block p-5 text-center text-gray-300 transition duration-200 ease-out hover:bg-gray-100 hover:text-gray-500" target="_blank" rel="noreferrer">
-                                    <svg mlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-auto fill-current" viewBox="0 0 24 24">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 mx-auto fill-current" viewBox="0 0 24 24">
                                         <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                                     </svg>
                                 </a>
