@@ -7,6 +7,12 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 //Security Package to avoid continuous request of buying and selling
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
+interface DaiToken {
+    function transfer(address dst, uint wad) external returns (bool);
+    function transferFrom(address src, address dst, uint wad) external returns (bool);
+    function balanceOf(address guy) external view returns (uint);
+}
+
 contract NFTMarketplace is ReentrancyGuard {
     using Counters for Counters.Counter;
 
@@ -16,8 +22,9 @@ contract NFTMarketplace is ReentrancyGuard {
     Counters.Counter private _programIds;
     Counters.Counter private _professionalIds;
 
-    uint256 listingPrice = 0.025 ether;
     address payable owner;
+    DaiToken public daiToken;
+    uint256 public listingPrice = 100;
 
     // Data Structure of a Profession
     struct Professional {
@@ -89,7 +96,8 @@ contract NFTMarketplace is ReentrancyGuard {
     );
 
     constructor() {
-      owner = payable(msg.sender);
+        daiToken = DaiToken(0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa);
+        owner = payable(msg.sender);
     }
 
     /* Updates the listing price of the contract */
@@ -203,9 +211,8 @@ contract NFTMarketplace is ReentrancyGuard {
         payable
         nonReentrant
     {
-        assert(programList[_programId].uid == msg.sender);  
-        require(msg.value == listingPrice, "Price must be equal to listing price");
-        owner.transfer(msg.value);
+        assert(programList[_programId].uid == msg.sender);
+        daiToken.transferFrom(msg.sender, owner, 100);
 
         _certIds.increment();
         uint256 cid = _certIds.current();
