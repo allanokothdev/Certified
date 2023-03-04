@@ -43,69 +43,71 @@ const professionalProfile = () => {
     }
 
     return (
-        <section className="bg-gray-200">
-            <div className="px-4 py-8 mx-auto">
-                <div className="lg:flex lg:-mx-2">
+        <>
+            <section className="bg-gray-200">
+                <div className="px-4 py-8 mx-auto">
+                    <div className="lg:flex lg:-mx-2">
 
-                    <div className="space-y-3 lg:w-1/5 lg:px-2 lg:space-y-4">
+                        <div className="space-y-3 lg:w-1/5 lg:px-2 lg:space-y-4">
 
-                        <div className="bg-white border border-white rounded-2xl p-2">
+                            <div className="bg-white border border-white rounded-2xl p-2">
 
-                            <div className="relative">
-                                <img
-                                    src={image}
-                                    alt=" "
-                                    className="w-full aspect-square object-cover rounded-2xl"
-                                />
+                                <div className="relative">
+                                    <img
+                                        src={image}
+                                        alt=" "
+                                        className="w-full aspect-square object-cover rounded-2xl"
+                                    />
 
-                                <div className="flex-auto sm:ml-5 justify-evenly">
-                                    <div className="flex items-center justify-between sm:mt-2">
-                                        <div className="flex items-center">
-                                            <div className="flex flex-col pt-2">
-                                                <div className="flex-none text-lg text-gray-800 font-bold leading-none">
-                                                    {name}
+                                    <div className="flex-auto sm:ml-5 justify-evenly">
+                                        <div className="flex items-center justify-between sm:mt-2">
+                                            <div className="flex items-center">
+                                                <div className="flex flex-col pt-2">
+                                                    <div className="flex-none text-lg text-gray-800 font-bold leading-none">
+                                                        {name}
+                                                    </div>
+                                                    <span className="pt-2">{title}</span>
+                                                    <span className="pt-2">{location}</span>
+                                                    <p className="w-96 text-sm text-slate-400 pt-2">{summary}</p>
                                                 </div>
-                                                <span className="pt-2">{title}</span>
-                                                <span className="pt-2">{location}</span>
-                                                <p className="w-96 text-sm text-slate-400 pt-2">{summary}</p>
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
+
 
                             </div>
 
 
                         </div>
+                        <div className="mt-6 lg:mt-0 lg:px-2 lg:w-4/5 ">
 
+                            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-3">
+                                {certificates.map((certificate, i) => (
+                                    <div key={i} className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
+                                        <div className="relative flex items-end overflow-hidden rounded-xl">
+                                            <img src={certificate.image} className="w-full aspect-[1.29/1] object-cover" alt=" " />
+                                        </div>
 
-                    </div>
-                    <div className="mt-6 lg:mt-0 lg:px-2 lg:w-4/5 ">
+                                        <div className="mt-1 p-2">
+                                            <h2 className="text-slate-700">{certificate.name}</h2>
+                                            <p className="mt-1 text-sm text-slate-400">{certificate.summary}</p>
 
-                        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-3">
-                            {certificates.map((certificate, i) => (
-                                <div key={i} className="cursor-pointer rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
-                                    <div className="relative flex items-end overflow-hidden rounded-xl">
-                                        <img src={certificate.image} className="w-full aspect-[1.29/1] object-cover" alt=" " />
-                                    </div>
-
-                                    <div className="mt-1 p-2">
-                                        <h2 className="text-slate-700">{certificate.name}</h2>
-                                        <p className="mt-1 text-sm text-slate-400">{certificate.summary}</p>
-
-                                        <div className="mt-1 flex items-end justify-between">
-                                            <p>
-                                                <span className="text-sm text-orange-300">{certificate.year}</span>
-                                            </p>
+                                            <div className="mt-1 flex items-end justify-between">
+                                                <p>
+                                                    <span className="text-sm text-orange-300">{certificate.year}</span>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     )
 };
 
