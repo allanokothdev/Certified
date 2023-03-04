@@ -1,4 +1,5 @@
 import { ethers } from "ethers";
+import Head from 'next/head'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { TESTNET, NFTAddress, NFTMarketplaceAddress } from "../config";
