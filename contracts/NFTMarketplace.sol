@@ -96,7 +96,7 @@ contract NFTMarketplace is ReentrancyGuard {
     );
 
     constructor() {
-        usdcToken = USDCToken(0xE097d6B3100777DC31B34dC2c58fB524C2e76921);
+        usdcToken = USDCToken(0xE097d6B3100777DC31B34dC2c58fB524C2e7692);
         owner = payable(msg.sender);
     }
 
