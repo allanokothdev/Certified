@@ -50,16 +50,20 @@ const useEthereum = () => {
     const checkConnection = async () => {
         if (window.ethereum) {
             // Request account access if needed
-            await ethereum.enable();
-            const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-            await provider.send('eth_requestAccounts', []);
-            const signer = await provider.getSigner();
-            if (signer === undefined) setConnected(false);
-            else {
-                const address = await signer.getAddress();
-                setAddress(address);
-                setSigner(signer);
-                setConnected(true);
+            try {
+                await ethereum.enable();
+                const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+                await provider.send('eth_requestAccounts', []);
+                const signer = await provider.getSigner();
+                if (signer === undefined) setConnected(false);
+                else {
+                    const address = await signer.getAddress();
+                    setAddress(address);
+                    setSigner(signer);
+                    setConnected(true);
+                }
+            } catch (error){
+                console.log(error)
             }
         } else if (window.web3) {
             const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
