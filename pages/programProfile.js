@@ -43,6 +43,12 @@ const ProgramProfile = () => {
 
     return (
         <>
+            <Head>
+                <title>Program Profile</title>
+                <meta name="description" content="Program Profile" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="../public/favicon.png" />
+            </Head>
             <section className="bg-gray-200">
                 <div className="px-4 py-8 mx-auto">
                     <div className="lg:flex lg:-mx-2">

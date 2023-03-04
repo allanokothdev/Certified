@@ -44,6 +44,12 @@ const professionalProfile = () => {
 
     return (
         <>
+            <Head>
+                <title>Professional Profile</title>
+                <meta name="description" content="Professional" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="../public/favicon.png" />
+            </Head>
             <section className="bg-gray-200">
                 <div className="px-4 py-8 mx-auto">
                     <div className="lg:flex lg:-mx-2">

@@ -119,6 +119,12 @@ export default function CreateCertificate() {
 
     return (
         <>
+            <Head>
+                <title>Create Certificate</title>
+                <meta name="description" content="Certificate" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <link rel="icon" href="../public/favicon.png" />
+            </Head>
             <div className="relative min-h-screen flex items-center justify-center bg-center bg-gray-200 py-12 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-cover">
 
                 <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
