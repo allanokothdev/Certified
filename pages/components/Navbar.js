@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import useEthereum from './useEthereum';
 import Link from 'next/link';
 

@@ -1,5 +1,3 @@
-import { useState, useEffect, useRef } from 'react'
-import useEthereum from './useEthereum';
 import Link from 'next/link';
 
 const ProfessionalBanner = () => {
