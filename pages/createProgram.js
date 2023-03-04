@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
+import Head from 'next/head'
 import { useState, useContext } from "react";
 import { ethers } from "ethers";
 import { create as ipfsHttpClient } from 'ipfs-http-client'
