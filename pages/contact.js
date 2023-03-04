@@ -100,7 +100,7 @@ const contact = () => {
                                 Address
                             </h3>
                             <p className="font-medium max-w-xs mx-auto leading-relaxed">
-                                KK 242 Street, Kigali, Rwand
+                                KK 242 Street, Kigali, Rwanda
                             </p>
                         </div>
                     </div>
