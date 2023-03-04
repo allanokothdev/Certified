@@ -24,7 +24,7 @@ contract NFTMarketplace is ReentrancyGuard {
 
     address payable owner;
     USDCToken public usdcToken;
-    uint256 public listingPrice = 1;
+    uint256 public listingPrice = 500000000000000000;  // 0.5 USDC with 18 decimal places
 
     // Data Structure of a Profession
     struct Professional {
