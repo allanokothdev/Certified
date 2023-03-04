@@ -5,6 +5,7 @@ import { TESTNET, NFTAddress, NFTMarketplaceAddress } from "../config";
 import NFT from "../abi/NFT.json";
 import NFTMarketplace from "../abi/NFTMarketplace.json";
 import { useRouter } from "next/router";
+import Head from 'next/head'
 
 const ProgramProfile = () => {
 
