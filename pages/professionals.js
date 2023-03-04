@@ -6,6 +6,7 @@ import NFTMarketplace from "../abi/NFTMarketplace.json";
 import NFT from "../abi/NFT.json";
 import ProfessionalBanner from "./components/ProfessionalBanner";
 import { useRouter } from "next/router";
+import Head from 'next/head'
 
 const professionals = () => {
 
