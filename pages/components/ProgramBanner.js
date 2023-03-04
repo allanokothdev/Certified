@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import useEthereum from '../useEthereum';
+import useEthereum from './useEthereum';
 import Link from 'next/link';
 
 const ProgramBanner = () => {
@@ -18,12 +18,12 @@ const ProgramBanner = () => {
                 backgroundSize: 'cover'
             }}
         >
-                
-                <div className="container flex flex-col flex-wrap content-center justify-center p-4 py-20 mx-auto md:p-10">
+
+            <div className="container flex flex-col flex-wrap content-center justify-center p-4 py-20 mx-auto md:p-10">
                 <h1 className="text-5xl antialiased font-semibold leading-none text-center text-gray-100">Certify with confidence</h1>
                 <p className="pt-2 pb-8 text-xl antialiased text-center text-gray-100">Join the revolution of secure certification with Certified</p>
-                    <OpenProgram />
-                </div>
+                <OpenProgram />
+            </div>
         </div>
 
     );
