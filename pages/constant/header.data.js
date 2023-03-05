@@ -1,21 +1,18 @@
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
   {
-    path: 'home',
+    path: '/',
     label: 'Home'
   },{
-    path: 'opportunity',
-    label: 'Opportunity'
-  },
-  {
-    path: 'program',
+    path: 'programs',
     label: 'Programs'
   },
   {
-    path: 'program',
-    label: 'Programs'
+    path: 'professionals',
+    label: 'Professionals'
+  },
+  {
+    path: 'contacts',
+    label: 'Contacts'
   }
 ]
-
-
-// TABS: Events, Hackathons, Jobs, Grants
