@@ -1,6 +1,6 @@
-export const NFTAddress = "0x793B53052acdda278C915De36f216E72AfFe2B14";
+export const NFTAddress = "0x2b7c2B912ff61C997B527A4d34Ceb7E0d941Cc1d";
 
-export const NFTMarketplaceAddress = "0x3ED78F29caB0cD646d8B461095BB6dE6Ec53DF79";
+export const NFTMarketplaceAddress = "0x6cAC6598A9cB05E39dE373159835679E42b75CE0";
 
 export const rpc_url = `https://ipfs.infura.io:5001`;
 

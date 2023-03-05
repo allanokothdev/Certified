@@ -101,6 +101,7 @@ contract NFTMarketplace is ReentrancyGuard {
 
 
     // MATIC Mumbai = 0x0000000000000000000000000000000000001010
+    // USDC  Mumbai = 0x2058A9D7613eEE744279e3856Ef0eAda5FCbaA7e
     
 
     constructor() {
