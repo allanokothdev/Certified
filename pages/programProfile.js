@@ -77,7 +77,7 @@ const ProgramProfile = () => {
                                                         <span className="mr-3 border-r border-gray-200  max-h-0" />
                                                         <span>{year}</span>
                                                     </div>
-                                                    <p className="w-96 text-sm text-slate-400 pt-2">{summary}</p>
+                                                    <p className="text-sm text-slate-400 pt-2">{summary}</p>
                                                 </div>
                                             </div>
                                         </div>

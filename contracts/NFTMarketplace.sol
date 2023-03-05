@@ -7,10 +7,14 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 //Security Package to avoid continuous request of buying and selling
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-interface USDCToken {
-    function transfer(address dst, uint wad) external returns (bool);
-    function transferFrom(address src, address dst, uint wad) external returns (bool);
-    function balanceOf(address guy) external view returns (uint);
+interface USDC {
+
+    function balanceOf(address account) external view returns (uint256);
+    function allowance(address owner, address spender) external view returns (uint256);
+    function transfer(address recipient, uint256 amount) external returns (bool);
+    function approve(address spender, uint256 amount) external returns (bool);
+    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
+
 }
 
 contract NFTMarketplace is ReentrancyGuard {
@@ -23,8 +27,8 @@ contract NFTMarketplace is ReentrancyGuard {
     Counters.Counter private _professionalIds;
 
     address payable owner;
-    USDCToken public usdcToken;
-    uint256 public listingPrice = 500000000000000000;  // 0.5 USDC with 18 decimal places
+    USDC public USDc;
+    uint256 public listingPrice = 500000;  // 0.5 USDC with 6 decimal places
 
     // Data Structure of a Profession
     struct Professional {
@@ -95,8 +99,12 @@ contract NFTMarketplace is ReentrancyGuard {
         string title
     );
 
+
+    // MATIC Mumbai = 0x0000000000000000000000000000000000001010
+    
+
     constructor() {
-        usdcToken = USDCToken(0xE097d6B3100777DC31B34dC2c58fB524C2e76921);
+        USDc = USDC(0x2058A9D7613eEE744279e3856Ef0eAda5FCbaA7e);
         owner = payable(msg.sender);
     }
 
@@ -212,7 +220,9 @@ contract NFTMarketplace is ReentrancyGuard {
         nonReentrant
     {
         assert(programList[_programId].uid == msg.sender);
-        usdcToken.transferFrom(msg.sender, owner, listingPrice);
+
+         // transfer USDC to this contract
+        USDc.transferFrom(msg.sender, owner, listingPrice);
 
         _certIds.increment();
         uint256 cid = _certIds.current();

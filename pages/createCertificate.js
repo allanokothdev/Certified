@@ -109,7 +109,8 @@ export default function CreateCertificate() {
             NFTAddress,
             student,
             pid,
-            tokenId
+            tokenId,
+            reference
         );
         //waiting for the transaction to complete
         await transaction.wait();
