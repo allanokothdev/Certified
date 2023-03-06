@@ -16,7 +16,7 @@ Program Managers ( Hackathons, Fellowships, Bootcamps )
 
 HR Professionals
 
-# Next Development Plan
+## Next Development Plan
 Transition to Soulbound Token (NFT Tokens that are Non Transferable)
 Account Abstraction - Implement Account Abstraction to help onboard Non-technical users
 Experimental tests with Local Blockchain Education Communities in Africa, (Test pricing... )
@@ -35,5 +35,5 @@ Professional Profile - Done
 
 Payment Module - Done - 0.5 USDC per certificate upload
 
-# Marketing
+## Marketing
 Are you tired of dealing with fraudulent certificates and the administrative burden of verifying credentials? Look no further than Certified! Our web3 platform uses NFTs to provide a secure and reliable way for universities to publish and verify their students' certificates. With Certified, you can establish trust and transparency in the certification process, reduce costs, and streamline administrative tasks. Don't let fraudulent certificates hold you back - join the Certified revolution today!
