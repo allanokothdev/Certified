@@ -21,7 +21,7 @@ const client = ipfsHttpClient({
     },
 });
 
-export default function createProgram() {
+const createProgram = () => {
 
     const [fileUrl, setFileUrl] = useState(null);
     const [formInput, updateFormInput] = useState({ title: '', summary: '', category: '', year: '' })
@@ -259,3 +259,5 @@ export default function createProgram() {
         </>
     );
 }
+
+export default createProgram;

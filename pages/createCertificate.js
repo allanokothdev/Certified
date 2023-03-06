@@ -22,7 +22,7 @@ const client = ipfsHttpClient({
 });
 
 
-export default function CreateCertificate() {
+const createCertificate = () => {
 
     const router = useRouter();
     const { uid, pid, title, year } = router.query;
@@ -226,3 +226,5 @@ export default function CreateCertificate() {
         </>
     );
 }
+
+export default createCertificate;

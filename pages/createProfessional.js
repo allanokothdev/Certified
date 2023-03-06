@@ -22,7 +22,7 @@ const client = ipfsHttpClient({
     },
 });
 
-export default function createProfessional() {
+const createProfessional = () => {
 
     const [fileUrl, setFileUrl] = useState(null);
     const [formInput, updateFormInput] = useState({ name: '', title: '', summary: '', location: '', twitterLink: '', githubLink: '', linkedinLink: '' });
@@ -364,24 +364,4 @@ export default function createProfessional() {
     )
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default createProfessional;
