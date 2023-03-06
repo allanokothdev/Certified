@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
-import useEthereum from './useEthereum';
 import Link from 'next/link';
+import { useState } from "react";
+import { ethers } from "ethers";
 
 const NavBar = () => {
-
-    const { connect, address, connected, checkConnection } = useEthereum();
+    
+    const [address, setAddress] = useState();
+    const [connected, setConnected] = useState();
 
     useEffect (() => {
         checkConnection();
@@ -15,6 +17,37 @@ const NavBar = () => {
             
             <button onClick={onClick} className="inline-flex items-center w-full px-6 py-3 text-sm font-bold leading-4 text-white bg-indigo-600 md:px-3 md:w-auto md:rounded-full lg:px-5 hover:bg-indigo-500 focus:outline-none md:focus:ring-2 focus:ring-0 focus:ring-offset-2 focus:ring-indigo-600" type="button">{children}</button>
         )
+    }
+
+
+    const checkConnection = async () => {
+        if (window.ethereum) {
+            // Request account access if needed
+            try {
+                await ethereum.enable();
+                const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+                await provider.send('eth_requestAccounts', []);
+                const signer = await provider.getSigner();
+                if (signer === undefined) setConnected(false);
+                else {
+                    const address = await signer.getAddress();
+                    setAddress(address);
+                    setConnected(true);
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        } else if (window.web3) {
+            const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+            await provider.send('eth_requestAccounts', []);
+            const signer = await provider.getSigner();
+            if (signer === undefined) setConnected(false);
+            else {
+                const address = await signer.getAddress();
+                setAddress(address);
+                setConnected(true);
+            }
+        }
     }
 
     return (
@@ -58,7 +91,7 @@ const NavBar = () => {
                                 {connected ? (
                                     <Button >{address.toString().substring(0, 11)+"..."}</Button>
                                 ) : (
-                                    <Button onClick={connect}>Connect Wallet</Button>
+                                    <Button onClick={checkConnection()}>Connect Wallet</Button>
                                 )}
                             </div>
                         </div>
