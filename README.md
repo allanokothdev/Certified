@@ -18,10 +18,15 @@ HR Professionals
 
 ## Next Development Plan
 Transition to Soulbound Token (NFT Tokens that are Non Transferable)
+
 Account Abstraction - Implement Account Abstraction to help onboard Non-technical users
+
 Experimental tests with Local Blockchain Education Communities in Africa, (Test pricing... )
+
 Create GraphQL subgraph for Certified to support indexing.
-Multi-Blockchain
+
+Multichain (Aurora, Binance, Celo, Polygon, Fantom, Ethereum) - These chains have active communities in Africa, and deploying our Dapp on these chains will help us tap into these communities and grow usage.
+
 Deployment.
 
 ## What we achieved with previous grant.
