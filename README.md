@@ -26,9 +26,13 @@ Deployment.
 
 ## What we achieved with previous grant.
 UI/UX revamp - Done
+
 Web Domain Purchase - Done
+
 Program Profile - Done 
+
 Professional Profile - Done
+
 Payment Module - Done - 0.5 USDC per certificate upload
 
 # Marketing
