@@ -14,7 +14,7 @@ const Hero = () => {
             <div className="overflow-hidden pt-16 pb-16">
                 <div className="relative container px-4 mx-auto">
                     <div className="flex flex-wrap -m-8">
-                        <div className="w-full md:w-1/2 lg:w-4/12 xl:w-6/12 p-8">
+                        <div className="w-full md:w-1/2 lg:w-4/12 xl:w-4/12 p-8">
 
                             <h1 className="mb-8 text-6xl md:text-8xl lg:text-4xl font-bold font-heading md:max-w-2xl leading-none">
                                 Protect your Brand's reputation
@@ -91,9 +91,9 @@ const Hero = () => {
 
                         </div>
 
-                        <div className="w-full md:w-1/2 lg:w-8/12 xl:absolute xl:right-0 xl:bottom-20 p-8">
+                        <div className="w-full md:w-1/2 lg:w-8/12 xl:w-8/12 p-8">
                             <div className="flex flex-wrap justify-center items-center lg:justify-end -m-3">
-                                <div className="w-auto lg:w-1/3 xl:pt-28 p-3">
+                                <div className="w-auto lg:w-1/3 xl:w-1/3 p-3">
                                     <div className="flex flex-wrap justify-end">
                                         <div className="w-auto">
                                             <img className="mx-auto transform"
