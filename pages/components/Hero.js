@@ -90,7 +90,7 @@ const Hero = () => {
 
                             </div>
 
-
+                        </div>
               
                         <div className="w-full md:w-8/12 lg:w-8/12  flex justify-end items-center xl:w-8/12 p-8">
                             <div className="flex items-center lg:justify-end -m-3">
