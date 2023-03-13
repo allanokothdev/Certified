@@ -5,30 +5,30 @@ const Hero = () => {
 
     const OpenPage = () => {
         return (
-            <Link className="mb-8 py-2 px-10 text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" href="/createProgram">Get Started today!</Link>
+            <Link className="mb-12 py-2 px-10 text-white font-semibold border border-indigo-700 rounded-xl md:rounded-full focus:ring focus:ring-indigo-300 bg-indigo-600 hover:bg-indigo-700 transition ease-in-out duration-200" href="/createProgram">Get Started today!</Link>
         )
     }
 
     return (
         <section className="bg-blueGray-50">
-            <div className="overflow-hidden pt-16 pb-16">
-                <div className="relative container px-4 mx-auto">
-                    <div className="flex flex-wrap -m-8">
-                        <div className="w-full md:w-1/2 lg:w-4/12 xl:w-6/12 p-8">
+            <div className="overflow-x-hidden p-16 flex justify-center items-center">
+                <div className="container px-4 mx-auto">
+                    <div className="flex flex-wrap items-center -m-8">
+                        <div className="w-full md:w-1/2 lg:w-4/12 xl:w-4/12">
 
-                            <h1 className="mb-8 text-6xl md:text-8xl lg:text-4xl font-bold font-heading md:max-w-2xl leading-none">
+                            <h1 className="mb-12 text-6xl md:text-6xl lg:text-4xl xl:text-6xl font-bold font-heading md:max-w-2xl leading-none">
                                 Protect your Brand's reputation
                             </h1>
 
                             <div>
-                                <p className="mb-8 text-lg text-gray-700 font-medium md:max-w-sm">
+                                <p className="mb-10 text-lg text-gray-700 font-medium md:max-w-sm">
                                     Ensure the integrity of your educational institution's certificates with Certified
                                 </p>
 
                                 <div className="mb-2 md:inline-block">
 
                                     <OpenPage />
-                                    <h3 className="mt-8 text-gray-900 font-semibold">Trusted by top brands – Certified</h3>
+                                    <h3 className="mt-12 text-gray-900 font-semibold">Trusted by top brands – Certified</h3>
 
                                 </div>
 
@@ -91,9 +91,9 @@ const Hero = () => {
 
                         </div>
 
-                        <div className="w-full md:w-1/2 lg:w-8/12 xl:absolute xl:right-0 xl:bottom-20 p-8">
-                            <div className="flex flex-wrap justify-center items-center lg:justify-end -m-3">
-                                <div className="w-auto lg:w-1/3 xl:pt-28 p-3">
+                        <div className="w-full md:w-8/12 lg:w-8/12  flex justify-end items-center xl:w-8/12 p-8">
+                            <div className="flex items-center lg:justify-end -m-3">
+                                <div className="w-auto flex-wrap lg:w-1/3 xl:w-1/3 p-3">
                                     <div className="flex flex-wrap justify-end">
                                         <div className="w-auto">
                                             <img className="mx-auto transform"
@@ -104,7 +104,7 @@ const Hero = () => {
                                     </div>
                                 </div>
 
-                                <div className="w-auto lg:w-1/3 p-3">
+                                <div className="w-auto lg:w-1/3  p-3">
                                     <div className="flex flex-wrap justify-center -m-3">
                                         <div className="w-auto p-3">
                                             <a>
