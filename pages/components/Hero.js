@@ -11,10 +11,12 @@ const Hero = () => {
 
     return (
         <section className="bg-blueGray-50">
+
             <div className="overflow-x-hidden p-16 flex justify-center items-center">
                 <div className="container px-4 mx-auto">
                     <div className="flex flex-wrap items-center -m-8">
                         <div className="w-full md:w-1/2 lg:w-4/12 xl:w-4/12">
+
 
                             <h1 className="mb-12 text-6xl md:text-6xl lg:text-4xl xl:text-6xl font-bold font-heading md:max-w-2xl leading-none">
                                 Protect your Brand's reputation
@@ -89,11 +91,11 @@ const Hero = () => {
                             </div>
 
 
-                        </div>
-
+              
                         <div className="w-full md:w-8/12 lg:w-8/12  flex justify-end items-center xl:w-8/12 p-8">
                             <div className="flex items-center lg:justify-end -m-3">
                                 <div className="w-auto flex-wrap lg:w-1/3 xl:w-1/3 p-3">
+                  
                                     <div className="flex flex-wrap justify-end">
                                         <div className="w-auto">
                                             <img className="mx-auto transform"
